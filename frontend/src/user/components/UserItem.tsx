@@ -10,7 +10,7 @@ const UserItem: React.FC<User> = ({ id, image, name, places }) => {
       <Card>
         <Link
           to={`${id}/places`}
-          className="flex items-center w-full h-full p-4 text-white bg-[#292929] hover:bg-[#ffd900] active:bg-[#ffd900] hover:text-[#292929] active:text-[#292929]"
+          className="flex items-center w-full h-full p-4 text-[#EEEEEE] bg-[#222831] hover:text-[#222831] hover:bg-[#EEEEEE] active:bg-[#31363F] duration-500"
         >
           <div className="w-16 h-16 mr-6">
             <Avatar image={image} alt={name} />
@@ -18,7 +18,7 @@ const UserItem: React.FC<User> = ({ id, image, name, places }) => {
           <div>
             <h2 className="mb-2  font-normal text-2xl">{name}</h2>
             <h3 className="m-0 ">
-              User Shared: {places} {places === 1 ? "place" : "places"}.
+              Shared: {places} {places === 1 ? "place" : "places"}.
             </h3>
           </div>
         </Link>

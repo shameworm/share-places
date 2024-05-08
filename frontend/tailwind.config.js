@@ -11,7 +11,7 @@ export default {
       },
       extend: {
         fontFamily: {
-          sans: ["Josefin Sans", "sans-serif"],
+          sans: ["Ubuntu", "sans-serif"],
           alata: ["Alata"],
         },
       },
