@@ -2,10 +2,13 @@ import { ReactNode } from "react";
 
 type CardProps = {
   children: ReactNode;
+  className?: string;
 };
-const Card: React.FC<CardProps> = ({ children }) => {
+const Card: React.FC<CardProps> = ({ children, className }) => {
   return (
-    <div className="relative m-0 shadow rounded-2xl p-0 overflow-hidden bg-white">
+    <div
+      className={`relative m-0 shadow rounded-2xl overflow-hidden bg-white ${className}`}
+    >
       {children}
     </div>
   );

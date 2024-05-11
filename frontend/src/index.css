@@ -9,3 +9,66 @@
 body {
   @apply text-lg font-sans m-0 bg-[#76ABAE];
 }
+
+@layer components {
+  .button {
+    @apply text-inherit py-2 px-3 border border-solid border-[#76ABAE] rounded-[4px] bg-[#222831] text-[#EEEEEE] inline-block cursor-pointer my-4 mx-2 md:mr-4 md:px-6;
+
+    &:focus {
+      @apply outline-none;
+    }
+
+    &:hover,
+    &:active {
+      @apply bg-[#76ABAE] border-[#222831] text-black;
+    }
+
+    &.button_inverse {
+      @apply bg-[#76ABAE] text-white;
+
+      &:hover,
+      &:active {
+        @apply text-[#76ABAE]  bg-[#222831];
+      }
+    }
+
+    &.button_danger {
+      @apply bg-[#702626] border-[#702626];
+
+      &:hover,
+      &:active {
+        @apply bg-[#f05a5a] border-[#f05a5a];
+      }
+    }
+
+    &.button_small {
+      @apply text-base;
+    }
+
+    &.button_big {
+      @apply text-2xl;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:active:disabled {
+      @apply bg-[#eeeeee] text-[#615e5e] border-[#eeeeee] cursor-not-allowed;
+    }
+  }
+}
+
+.modal {
+  @apply m-0 fixed top-[10vh] left-[calc(50%-15rem)] w-[30rem] md:left-[calc(50%-25rem)] md:w-[50rem] max-h-[80vh] bg-[#eeeeee] border-none rounded-md z-[100] shadow-md flex flex-col justify-between;
+}
+
+.modal header {
+  @apply text-center bg-[#222831] p-8 text-white text-2xl uppercase;
+}
+
+.map_wrapper {
+  @apply  h-full w-full;
+}
+
+#map {
+  @apply w-full h-[30rem] mx-auto;
+}
