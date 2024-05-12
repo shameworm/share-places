@@ -1,6 +1,7 @@
 import { Transition } from "@headlessui/react";
 import { useEffect, useRef, ReactNode } from "react";
 import { createPortal } from "react-dom";
+
 import Backdrop from "./Backdrop";
 
 const Modal: React.FC<{

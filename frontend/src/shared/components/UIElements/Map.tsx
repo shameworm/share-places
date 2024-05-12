@@ -1,21 +1,32 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface PlaceMapProps {
   center: { lat: number; lng: number };
   zoom: number;
 }
+
 const Map: React.FC<PlaceMapProps> = ({ center, zoom }) => {
-  const mapRef = useRef();
+  const mapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const map = new window.google.maps.Map(mapRef.current, {
-      center,
-      zoom,
-    });
+    function initMap(): void {
+      const Map = google.maps.Map;
+      const map = new Map(mapRef.current as HTMLDivElement, {
+        center,
+        zoom,
+      });
+      new google.maps.Marker({
+        position: center,
+        map,
+      });
+    }
 
-    new window.google.maps.Marker({ position: center, map: map });
+    google.maps.importLibrary("maps").then(() => {
+      initMap();
+    });
   }, [center, zoom]);
-  return <div id="map" />;
+
+  return <div ref={mapRef} id="map"></div>;
 };
 
 export default Map;
