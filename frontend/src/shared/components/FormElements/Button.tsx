@@ -5,6 +5,7 @@ interface ButtonProps {
   to?: string;
   size?: string;
   inverse?: boolean;
+  type?: "button" | "submit" | "reset";
   danger?: boolean;
   onClick?: () => void;
   children: ReactNode;
@@ -17,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
   size,
   children,
   onClick,
+  type,
   ...props
 }) => {
   if (to) {
@@ -38,6 +40,7 @@ const Button: React.FC<ButtonProps> = ({
         inverse && "button_inverse"
       } ${danger && "button_danger"}`}
       onClick={onClick}
+      type={type}
       {...props}
     >
       {children}
