@@ -5,13 +5,7 @@ type CardProps = {
   className?: string;
 };
 const Card: React.FC<CardProps> = ({ children, className }) => {
-  return (
-    <div
-      className={`relative m-0 shadow rounded-2xl overflow-hidden bg-white ${className}`}
-    >
-      {children}
-    </div>
-  );
+  return <div className={`${className}`}>{children}</div>;
 };
 
 export default Card;

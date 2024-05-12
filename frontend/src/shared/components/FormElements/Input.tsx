@@ -5,11 +5,12 @@ interface InputProps {
   type?: string;
   isTextArea?: boolean;
   error: FieldError | Merge<FieldError, FieldErrorsImpl> | undefined;
+  value?: string;
 }
 const Input: React.ForwardRefRenderFunction<
   HTMLInputElement | HTMLTextAreaElement,
   InputProps
-> = ({ label, type, error, isTextArea, ...props }, ref) => {
+> = ({ label, type, error, isTextArea, value, ...props }, ref) => {
   return (
     <div className="mb-6">
       <label className="block text-gray-700 text-xl font-bold mb-2">
@@ -22,6 +23,7 @@ const Input: React.ForwardRefRenderFunction<
           className={`shadow appearance-none whitespace-nowrap border rounded w-full py-3 h-40 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
             error && "border-[#f05a5a]"
           }`}
+          value={value as string}
         ></textarea>
       )}
       {!isTextArea && (
@@ -32,6 +34,7 @@ const Input: React.ForwardRefRenderFunction<
           className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
             error && "border-[#f05a5a]"
           }`}
+          value={value as string}
         />
       )}
       {error?.message && (

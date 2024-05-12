@@ -17,24 +17,58 @@ const PlaceItem: React.FC<Place> = ({
   coordinates,
 }) => {
   const [showMap, setShowMap] = useState(false);
+  const [showDeleteModal, setDeleteModal] = useState(false);
 
   const handleOpenMap = () => {
     setShowMap(true);
+  };
+
+  const handleOpenDelete = () => {
+    setDeleteModal(true);
   };
 
   const handleCloseMap = () => {
     setShowMap(false);
   };
 
+  const handleCloseDelete = () => {
+    setDeleteModal(false);
+  };
+
+  const handleConfirmDeletion = () => {
+    setDeleteModal(true);
+    console.log("DELETING...");
+  };
+
   return (
     <>
       <Modal showMap={showMap} onClose={handleCloseMap}>
         <header>{address}</header>
-        <div className="map_wrapper">
+        <div className="modal_wrapper">
           <Map center={coordinates} zoom={16} />
         </div>
         <Button onClick={handleCloseMap}>Close</Button>
       </Modal>
+
+      <Modal showMap={showDeleteModal} onClose={handleCloseDelete}>
+        <header> You want to delete this shared place?</header>
+        <div className="modal_wrapper text-center max-h-[40rem]">
+          <p>
+            Deleting a shared place can permanently remove it from your records.
+            Make sure you're certain about this decision, as it cannot be
+            undone.
+          </p>
+        </div>
+        <div className="flex justify-center items-center">
+          <Button danger onClick={handleConfirmDeletion}>
+            Delete
+          </Button>
+          <Button inverse onClick={handleCloseDelete}>
+            Close
+          </Button>
+        </div>
+      </Modal>
+
       <li className="my-4 mx-0">
         <Card className={"p-0"}>
           <div className="w-full h-[12.5rem] mr-6 md:h-80">
@@ -53,8 +87,10 @@ const PlaceItem: React.FC<Place> = ({
             <Button inverse onClick={handleOpenMap}>
               View On Map
             </Button>
-            <Button to={`places/${id}`}>Edit</Button>
-            <Button danger>Delete</Button>
+            <Button to={`/places/${id}`}>Edit</Button>
+            <Button danger onClick={handleOpenDelete}>
+              Delete
+            </Button>
           </div>
         </Card>
       </li>
