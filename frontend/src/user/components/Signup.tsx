@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { Form, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import ForwardedInput from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
@@ -71,7 +71,7 @@ const Signup: React.FC<{ isLogin: boolean; classes: string }> = ({
   );
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} className={classes}>
+    <form onSubmit={handleSubmit(onSubmit)} className={classes}>
       <Input
         label="E-mail"
         type="email"
@@ -119,7 +119,7 @@ const Signup: React.FC<{ isLogin: boolean; classes: string }> = ({
       <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
         {isLogin ? "Signup Instead" : "Login Instead"}
       </Link>
-    </Form>
+    </form>
   );
 };
 

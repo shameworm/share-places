@@ -1,8 +1,8 @@
 import { useSearchParams } from "react-router-dom";
 
 import Card from "../../shared/components/UIElements/Card";
-import Login from "./Login";
-import Signup from "./Signup";
+import Login from "../components/Login";
+import Signup from "../components/Signup";
 
 const Auth: React.FC = () => {
   const [searchParams] = useSearchParams();

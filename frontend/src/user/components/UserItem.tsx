@@ -6,7 +6,7 @@ import Avatar from "../../shared/components/UIElements/Avatar";
 
 const UserItem: React.FC<User> = ({ id, image, name, places }) => {
   return (
-    <li className="m-4 w-[calc(45% - 2rem)] min-w-[17.5rem]">
+    <li className="m-4 w-[calc(50% - 2rem)] min-w-[17.5rem]">
       <Card>
         <Link
           to={`${id}/places`}

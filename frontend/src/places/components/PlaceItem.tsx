@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { useState } from "react";
 
 import Card from "../../shared/components/UIElements/Card";
@@ -6,6 +7,7 @@ import Modal from "../../shared/components/UIElements/Modal";
 import Map from "../../shared/components/UIElements/Map";
 
 import { Place } from "../../models/Place";
+import { RootState } from "../../shared/store";
 
 const PlaceItem: React.FC<Place> = ({
   id,
@@ -16,6 +18,7 @@ const PlaceItem: React.FC<Place> = ({
   creatorId,
   coordinates,
 }) => {
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [showMap, setShowMap] = useState(false);
   const [showDeleteModal, setDeleteModal] = useState(false);
 
@@ -87,10 +90,14 @@ const PlaceItem: React.FC<Place> = ({
             <Button inverse onClick={handleOpenMap}>
               View On Map
             </Button>
-            <Button to={`/places/${id}`}>Edit</Button>
-            <Button danger onClick={handleOpenDelete}>
-              Delete
-            </Button>
+            {isLoggedIn && (
+              <>
+                <Button to={`/places/${id}`}>Edit</Button>
+                <Button danger onClick={handleOpenDelete}>
+                  Delete
+                </Button>
+              </>
+            )}
           </div>
         </Card>
       </li>

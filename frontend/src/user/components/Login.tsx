@@ -1,17 +1,24 @@
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { Form, Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 
 import ForwardedInput from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../shared/store/authSlice";
 
 const Input = ForwardedInput;
 const Login: React.FC<{ isLogin: boolean; classes: string }> = ({
   isLogin,
   classes,
 }) => {
+  const dispatch = useDispatch();
   const loginRef = useRef<HTMLInputElement | null>();
   const passwordRef = useRef<HTMLInputElement | null>();
+
+  const handleLogin = () => {
+    dispatch(authActions.login());
+  };
 
   const {
     register,
@@ -21,6 +28,8 @@ const Login: React.FC<{ isLogin: boolean; classes: string }> = ({
 
   const onSubmit = (data: unknown) => {
     console.log(data);
+    handleLogin();
+    return redirect("/");
   };
 
   const { ref: refLogin, ...restLoginProps } = register("login", {
@@ -38,7 +47,7 @@ const Login: React.FC<{ isLogin: boolean; classes: string }> = ({
   });
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} className={classes}>
+    <form onSubmit={handleSubmit(onSubmit)} className={classes}>
       <Input
         label="Login"
         type="text"
@@ -65,7 +74,7 @@ const Login: React.FC<{ isLogin: boolean; classes: string }> = ({
       <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
         {isLogin ? "Signup Instead" : "Login Instead"}
       </Link>
-    </Form>
+    </form>
   );
 };
 
