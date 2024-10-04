@@ -13,8 +13,8 @@ let DUMMY_PLACES: Place[] = [
     title: "Empire State Building",
     description: "One of the most famous sky scrapers in the world!",
     location: {
-      lat: 40.7484474,
-      lng: -73.9871516,
+      lat: 40.748_447_4,
+      lng: -73.987_151_6,
     },
     address: "20 W 34th St, New York, NY 10001",
     creator: "u1",
@@ -24,7 +24,7 @@ let DUMMY_PLACES: Place[] = [
 export const getPlaceById = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const placeId = req.params.pid;
 
@@ -42,7 +42,7 @@ export const getPlaceById = (
 export const getPlacesByUserId = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const userId = req.params.uid;
 
@@ -52,7 +52,7 @@ export const getPlacesByUserId = (
 
   if (!places || places.length === 0) {
     return next(
-      new HttpError("Could not find places for the provided user id.", 404)
+      new HttpError("Could not find places for the provided user id.", 404),
     );
   }
 
@@ -62,12 +62,12 @@ export const getPlacesByUserId = (
 export const createPlace = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422)
+      new HttpError("Invalid inputs passed, please check your data.", 422),
     );
   }
 
@@ -97,12 +97,12 @@ export const createPlace = async (
 export const updatePlace = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422)
+      new HttpError("Invalid inputs passed, please check your data.", 422),
     );
   }
 
@@ -112,7 +112,7 @@ export const updatePlace = (
   const placeIndex = DUMMY_PLACES.findIndex((p) => p.id === placeId);
   if (placeIndex === -1) {
     return next(
-      new HttpError("Could not find a place for the provided id.", 404)
+      new HttpError("Could not find a place for the provided id.", 404),
     );
   }
 
@@ -130,7 +130,7 @@ export const updatePlace = (
 export const deletePlace = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const placeId = req.params.pid;
   if (!DUMMY_PLACES.find((p) => p.id === placeId)) {

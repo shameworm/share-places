@@ -22,13 +22,13 @@ router.post(
     check("description").isLength({ min: 5 }),
     check("address").not().isEmpty(),
   ],
-  createPlace
+  createPlace,
 );
 
 router.patch(
   "/:pid",
   [check("title").not().isEmpty(), check("description").isLength({ min: 5 })],
-  updatePlace
+  updatePlace,
 );
 
 router.delete("/:pid", deletePlace);

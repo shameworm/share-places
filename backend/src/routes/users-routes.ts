@@ -11,13 +11,10 @@ router.post(
   "/signup",
   [
     check("name").not().isEmpty(),
-    check("email")
-      .normalizeEmail() 
-      .isEmail(),
+    check("email").normalizeEmail().isEmail(),
     check("password").isLength({ min: 6 }),
   ],
-  signup
+  signup,
 );
 
 router.post("/login", login);
-

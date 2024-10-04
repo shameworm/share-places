@@ -48,10 +48,9 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
   if (!identifiedUser || identifiedUser.password !== password) {
     throw new HttpError(
       "Could not identify user, credentials seem to be wrong.",
-      401
+      401,
     );
   }
 
   res.json({ message: "Logged in!" });
 };
-
