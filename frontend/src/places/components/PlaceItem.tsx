@@ -1,13 +1,13 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
-import Card from "../../shared/components/UIElements/Card";
-import Button from "../../shared/components/FormElements/Button";
-import Modal from "../../shared/components/UIElements/Modal";
-import Map from "../../shared/components/UIElements/Map";
+import Card from '../../shared/components/UIElements/Card';
+import Button from '../../shared/components/FormElements/Button';
+import Modal from '../../shared/components/UIElements/Modal';
+import Map from '../../shared/components/UIElements/Map';
 
-import { Place } from "../../models/Place";
-import { RootState } from "../../shared/store";
+import { Place } from '../../models/Place';
+import { RootState } from '../../shared/store';
 
 const PlaceItem: React.FC<Place> = ({
   id,
@@ -15,7 +15,7 @@ const PlaceItem: React.FC<Place> = ({
   title,
   description,
   address,
-  creatorId,
+  // creatorId,
   coordinates,
 }) => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -40,7 +40,7 @@ const PlaceItem: React.FC<Place> = ({
 
   const handleConfirmDeletion = () => {
     setDeleteModal(true);
-    console.log("DELETING...");
+    console.log('DELETING...');
   };
 
   return (
@@ -73,7 +73,7 @@ const PlaceItem: React.FC<Place> = ({
       </Modal>
 
       <li className="my-4 mx-0">
-        <Card className={"p-0"}>
+        <Card className={'p-0'}>
           <div className="w-full h-[12.5rem] mr-6 md:h-80">
             <img
               src={image}

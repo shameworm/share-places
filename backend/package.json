@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon dist/app.js",
-    "build": "tsc -w"
+    "build": "tsc -w",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +22,25 @@
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.11",
     "@types/uuid": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-unicorn": "^48.0.1",
+    "lint-staged": "^15.2.10",
     "nodemon": "^3.1.4",
+    "prettier": "^3.3.3",
     "typescript": "^5.5.3"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs}": [
+      "eslint --fix",
+      "eslint",
+      "prettier --write"
+    ],
+    "*.{json,md,yaml,yml}": [
+      "prettier --write"
+    ]
   }
 }
