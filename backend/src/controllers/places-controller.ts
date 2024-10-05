@@ -80,7 +80,7 @@ export const createPlace = async (
     return next(error);
   }
 
-  const createdPlace = {
+  const createdPlace: Place = {
     id: uuid(),
     title,
     description,
@@ -107,7 +107,7 @@ export const updatePlace = (
   }
 
   const { title, description } = req.body;
-  const placeId = req.params.pid;
+  const placeId = req.params["pid"];
 
   const placeIndex = DUMMY_PLACES.findIndex((p) => p.id === placeId);
   if (placeIndex === -1) {
@@ -118,8 +118,8 @@ export const updatePlace = (
 
   const updatedPlace: Place = {
     ...DUMMY_PLACES[placeIndex],
-    title: title || DUMMY_PLACES[placeIndex].title,
-    description: description || DUMMY_PLACES[placeIndex].description,
+    title: title || DUMMY_PLACES[placeIndex]!.title,
+    description: description || DUMMY_PLACES[placeIndex]!.description,
   };
 
   DUMMY_PLACES[placeIndex] = updatedPlace;
@@ -132,7 +132,7 @@ export const deletePlace = (
   res: Response,
   next: NextFunction,
 ) => {
-  const placeId = req.params.pid;
+  const placeId = req.params["pid"];
   if (!DUMMY_PLACES.find((p) => p.id === placeId)) {
     throw new HttpError("Could not find a place for that id.", 404);
   }
