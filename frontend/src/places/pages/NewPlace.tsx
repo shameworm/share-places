@@ -1,8 +1,8 @@
-import { useRef } from "react";
-import { useForm } from "react-hook-form";
+import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 
-import ForwardedInput from "../../shared/components/FormElements/Input";
-import Button from "../../shared/components/FormElements/Button";
+import ForwardedInput from '../../shared/components/FormElements/Input';
+import Button from '../../shared/components/FormElements/Button';
 
 const Input = ForwardedInput;
 
@@ -22,41 +22,41 @@ const NewPlace: React.FC = () => {
     console.log(data);
   };
 
-  const { ref: refTitle, ...restTitleProps } = register("title", {
+  const { ref: refTitle, ...restTitleProps } = register('title', {
     required: {
       value: true,
-      message: "This field is required!",
+      message: 'This field is required!',
     },
     minLength: {
       value: 5,
-      message: "Title is to short!",
+      message: 'Title is to short!',
     },
   });
 
   const { ref: refDescription, ...restDescriptionProps } = register(
-    "description",
+    'description',
     {
       required: {
         value: true,
-        message: "This field is required!",
+        message: 'This field is required!',
       },
       minLength: {
         value: 10,
         message:
-          "Please describe the place in more detail, (10 characters minimum)",
+          'Please describe the place in more detail, (10 characters minimum)',
       },
       maxLength: {
         value: 230,
         message:
-          "The description is to large, please short it. (230 characters maximum)",
+          'The description is to large, please short it. (230 characters maximum)',
       },
-    }
+    },
   );
 
-  const { ref: refAddress, ...restAddressProps } = register("address", {
+  const { ref: refAddress, ...restAddressProps } = register('address', {
     required: {
       value: true,
-      message: "This field is required!",
+      message: 'This field is required!',
     },
   });
 

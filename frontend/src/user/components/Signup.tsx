@@ -1,9 +1,9 @@
-import { useRef } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
-import ForwardedInput from "../../shared/components/FormElements/Input";
-import Button from "../../shared/components/FormElements/Button";
+import ForwardedInput from '../../shared/components/FormElements/Input';
+import Button from '../../shared/components/FormElements/Button';
 
 const Input = ForwardedInput;
 const Signup: React.FC<{ isLogin: boolean; classes: string }> = ({
@@ -26,48 +26,48 @@ const Signup: React.FC<{ isLogin: boolean; classes: string }> = ({
     console.log(data);
   };
 
-  const { ref: refEmail, ...restEmailProps } = register("email", {
+  const { ref: refEmail, ...restEmailProps } = register('email', {
     required: {
       value: true,
-      message: "This field is required!",
+      message: 'This field is required!',
     },
     pattern: {
       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-      message: "invalid email address",
+      message: 'invalid email address',
     },
   });
 
-  const { ref: refLogin, ...restLoginProps } = register("login", {
+  const { ref: refLogin, ...restLoginProps } = register('login', {
     required: {
       value: true,
-      message: "This field is required!",
+      message: 'This field is required!',
     },
   });
 
-  const { ref: refPassword, ...restPasswordProps } = register("password", {
+  const { ref: refPassword, ...restPasswordProps } = register('password', {
     required: {
       value: true,
-      message: "This field is required!",
+      message: 'This field is required!',
     },
     minLength: {
       value: 5,
-      message: "Password is to short. (5 characters minimum)",
+      message: 'Password is to short. (5 characters minimum)',
     },
   });
 
   const { ref: refConfirmPassword, ...restConfirmPasswordProps } = register(
-    "confirmPassword",
+    'confirmPassword',
     {
       required: {
         value: true,
-        message: "This field is required!",
+        message: 'This field is required!',
       },
       validate: (val: string) => {
-        if (watch("password") != val) {
-          return "Your passwords do no match";
+        if (watch('password') != val) {
+          return 'Your passwords do no match';
         }
       },
-    }
+    },
   );
 
   return (
@@ -114,10 +114,10 @@ const Signup: React.FC<{ isLogin: boolean; classes: string }> = ({
       ></Input>
 
       <Button inverse type="submit">
-        {isLogin ? "Login" : "Signup"}
+        {isLogin ? 'Login' : 'Signup'}
       </Button>
-      <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
-        {isLogin ? "Signup Instead" : "Login Instead"}
+      <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>
+        {isLogin ? 'Signup Instead' : 'Login Instead'}
       </Link>
     </form>
   );

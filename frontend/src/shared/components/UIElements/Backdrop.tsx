@@ -1,4 +1,4 @@
-import { createPortal } from "react-dom";
+import { createPortal } from 'react-dom';
 
 const Backdrop: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   return createPortal(
@@ -6,7 +6,7 @@ const Backdrop: React.FC<{ onClick: () => void }> = ({ onClick }) => {
       onClick={onClick}
       className="fixed top-0 left-0 w-full h-screen bg-[rgba(0,0,0,0.40)] z-10"
     ></div>,
-    document.getElementById("backdrop-hook")!
+    document.getElementById('backdrop-hook')!,
   );
 };
 

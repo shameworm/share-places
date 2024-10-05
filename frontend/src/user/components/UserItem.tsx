@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import { User } from "../../models/User";
-import Card from "../../shared/components/UIElements/Card";
-import Avatar from "../../shared/components/UIElements/Avatar";
+import { User } from '../../models/User';
+import Card from '../../shared/components/UIElements/Card';
+import Avatar from '../../shared/components/UIElements/Avatar';
 
 const UserItem: React.FC<User> = ({ id, image, name, places }) => {
   return (
@@ -18,7 +18,7 @@ const UserItem: React.FC<User> = ({ id, image, name, places }) => {
           <div>
             <h2 className="mb-2  font-normal text-2xl">{name}</h2>
             <h3 className="m-0 ">
-              Shared: {places} {places === 1 ? "place" : "places"}.
+              Shared: {places} {places === 1 ? 'place' : 'places'}.
             </h3>
           </div>
         </Link>

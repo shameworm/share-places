@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
-import { RootState } from "../../store";
-import { authActions } from "../../store/authSlice";
+import { RootState } from '../../store';
+import { authActions } from '../../store/authSlice';
 
 const NavLinks: React.FC = () => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -20,8 +20,8 @@ const NavLinks: React.FC = () => {
           className={(navData) =>
             `border-2 border-solid border-transparent py-2 px-4 hover:bg-[#31363F] hover:border-[#76ABAE] hover:rounded-full  hover:text-white duration-200 ${
               navData.isActive
-                ? "bg-[#76ABAE] border-[#76ABAE] rounded-full text-[#31363F]"
-                : "text-[#EEEEEE]"
+                ? 'bg-[#76ABAE] border-[#76ABAE] rounded-full text-[#31363F]'
+                : 'text-[#EEEEEE]'
             } `
           }
         >
@@ -35,8 +35,8 @@ const NavLinks: React.FC = () => {
             className={(navData) =>
               `border-2 border-solid border-transparent py-2 px-4 hover:bg-[#31363F] hover:border-[#76ABAE] hover:rounded-full  hover:text-white duration-200 ${
                 navData.isActive
-                  ? "bg-[#76ABAE] border-[#76ABAE] rounded-full text-[#31363F]"
-                  : "text-[#EEEEEE]"
+                  ? 'bg-[#76ABAE] border-[#76ABAE] rounded-full text-[#31363F]'
+                  : 'text-[#EEEEEE]'
               } `
             }
           >
@@ -51,8 +51,8 @@ const NavLinks: React.FC = () => {
             className={(navData) =>
               `border-2 border-solid border-transparent py-2 px-4 hover:bg-[#31363F] hover:border-[#76ABAE] hover:rounded-full  hover:text-white duration-200 ${
                 navData.isActive
-                  ? "bg-[#76ABAE] border-[#76ABAE] rounded-full text-[#31363F]"
-                  : "text-[#EEEEEE]"
+                  ? 'bg-[#76ABAE] border-[#76ABAE] rounded-full text-[#31363F]'
+                  : 'text-[#EEEEEE]'
               } `
             }
           >
@@ -78,8 +78,8 @@ const NavLinks: React.FC = () => {
             className={(navData) =>
               `border-2 border-solid border-transparent py-2 px-4 hover:bg-[#31363F] hover:border-[#76ABAE] hover:rounded-full  hover:text-white duration-200 ${
                 navData.isActive
-                  ? "bg-[#76ABAE] border-[#76ABAE] rounded-full text-[#31363F]"
-                  : "text-[#EEEEEE]"
+                  ? 'bg-[#76ABAE] border-[#76ABAE] rounded-full text-[#31363F]'
+                  : 'text-[#EEEEEE]'
               } `
             }
           >

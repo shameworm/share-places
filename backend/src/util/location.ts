@@ -22,6 +22,5 @@ export async function getCoordsForAddress(address: string) {
   }
 
   const coordinates = data.results[0].geometry.location;
-
   return coordinates;
 }

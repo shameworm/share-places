@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 interface ButtonProps {
   to?: string;
   size?: string;
   inverse?: boolean;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
   danger?: boolean;
   onClick?: () => void;
   children: ReactNode;
@@ -25,9 +25,9 @@ const Button: React.FC<ButtonProps> = ({
     return (
       <Link
         to={to}
-        className={`button button_${size || "default"} ${
-          inverse && "button_inverse"
-        } ${danger && "button_danger"}`}
+        className={`button button_${size || 'default'} ${
+          inverse && 'button_inverse'
+        } ${danger && 'button_danger'}`}
       >
         {children}
       </Link>
@@ -36,9 +36,9 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`button button_${size || "default"} ${
-        inverse && "button_inverse"
-      } ${danger && "button_danger"}`}
+      className={`button button_${size || 'default'} ${
+        inverse && 'button_inverse'
+      } ${danger && 'button_danger'}`}
       onClick={onClick}
       type={type}
       {...props}

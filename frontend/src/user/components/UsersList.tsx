@@ -1,6 +1,6 @@
-import { User } from "../../models/User";
-import UserItem from "./UserItem";
-import Card from "../../shared/components/UIElements/Card";
+import { User } from '../../models/User';
+import UserItem from './UserItem';
+import Card from '../../shared/components/UIElements/Card';
 
 type UserListProps = {
   items: User[];

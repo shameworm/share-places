@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 interface PlaceMapProps {
   center: { lat: number; lng: number };
@@ -21,7 +21,7 @@ const Map: React.FC<PlaceMapProps> = ({ center, zoom }) => {
       });
     }
 
-    google.maps.importLibrary("maps").then(() => {
+    google.maps.importLibrary('maps').then(() => {
       initMap();
     });
   }, [center, zoom]);

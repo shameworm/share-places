@@ -5,21 +5,7 @@ import { HttpError } from "../models/http-error";
 import { getCoordsForAddress } from "../util/location";
 
 import { Request, Response, NextFunction } from "express";
-import { Place } from "../models/place.model";
-
-let DUMMY_PLACES: Place[] = [
-  {
-    id: "p1",
-    title: "Empire State Building",
-    description: "One of the most famous sky scrapers in the world!",
-    location: {
-      lat: 40.748_447_4,
-      lng: -73.987_151_6,
-    },
-    address: "20 W 34th St, New York, NY 10001",
-    creator: "u1",
-  },
-];
+import Place from "../models/place.model";
 
 export const getPlaceById = (
   req: Request,
@@ -80,16 +66,27 @@ export const createPlace = async (
     return next(error);
   }
 
-  const createdPlace: Place = {
-    id: uuid(),
+  const createdPlace = new Place({
     title,
     description,
-    location: coordinates,
     address,
+    location: {
+      location: {
+        lat: coordinates.lat,
+        lng: coordinates.lng,
+      },
+    },
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Empire_State_Building_%28aerial_view%29.jpg/800px-Empire_State_Building_%28aerial_view%29.jpg",
     creator,
-  };
+  });
 
-  DUMMY_PLACES.push(createdPlace);
+  try {
+    await createdPlace.save();
+  } catch (err) {
+    const error = new HttpError("Creating place failed, please try again", 500);
+    return next(error);
+  }
 
   res.status(201).json({ place: createdPlace });
 };
@@ -118,8 +115,8 @@ export const updatePlace = (
 
   const updatedPlace: Place = {
     ...DUMMY_PLACES[placeIndex],
-    title: title || DUMMY_PLACES[placeIndex]!.title,
-    description: description || DUMMY_PLACES[placeIndex]!.description,
+    title: title || DUMMY_PLACES![placeIndex!].title,
+    description: description || DUMMY_PLACES[placeIndex].description,
   };
 
   DUMMY_PLACES[placeIndex] = updatedPlace;

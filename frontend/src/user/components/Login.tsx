@@ -1,11 +1,11 @@
-import { useRef } from "react";
-import { useForm } from "react-hook-form";
-import { Link, redirect } from "react-router-dom";
+import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, redirect } from 'react-router-dom';
 
-import ForwardedInput from "../../shared/components/FormElements/Input";
-import Button from "../../shared/components/FormElements/Button";
-import { useDispatch } from "react-redux";
-import { authActions } from "../../shared/store/authSlice";
+import ForwardedInput from '../../shared/components/FormElements/Input';
+import Button from '../../shared/components/FormElements/Button';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../shared/store/authSlice';
 
 const Input = ForwardedInput;
 const Login: React.FC<{ isLogin: boolean; classes: string }> = ({
@@ -29,20 +29,20 @@ const Login: React.FC<{ isLogin: boolean; classes: string }> = ({
   const onSubmit = (data: unknown) => {
     console.log(data);
     handleLogin();
-    return redirect("/");
+    return redirect('/');
   };
 
-  const { ref: refLogin, ...restLoginProps } = register("login", {
+  const { ref: refLogin, ...restLoginProps } = register('login', {
     required: {
       value: true,
-      message: "This field is required!",
+      message: 'This field is required!',
     },
   });
 
-  const { ref: refPassword, ...restPasswordProps } = register("password", {
+  const { ref: refPassword, ...restPasswordProps } = register('password', {
     required: {
       value: true,
-      message: "This field is required!",
+      message: 'This field is required!',
     },
   });
 
@@ -69,10 +69,10 @@ const Login: React.FC<{ isLogin: boolean; classes: string }> = ({
         {...restPasswordProps}
       ></Input>
       <Button inverse type="submit">
-        {isLogin ? "Login" : "Signup"}
+        {isLogin ? 'Login' : 'Signup'}
       </Button>
-      <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
-        {isLogin ? "Signup Instead" : "Login Instead"}
+      <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>
+        {isLogin ? 'Signup Instead' : 'Login Instead'}
       </Link>
     </form>
   );

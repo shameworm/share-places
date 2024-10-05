@@ -1,8 +1,8 @@
-import { Transition } from "@headlessui/react";
-import { useEffect, useRef, ReactNode } from "react";
-import { createPortal } from "react-dom";
+import { Transition } from '@headlessui/react';
+import { useEffect, useRef, ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 
-import Backdrop from "./Backdrop";
+import Backdrop from './Backdrop';
 
 const Modal: React.FC<{
   children: ReactNode;
@@ -35,7 +35,7 @@ const Modal: React.FC<{
         {children}
       </dialog>
     </Transition>,
-    document.getElementById("modal-hook")!
+    document.getElementById('modal-hook')!,
   );
 };
 

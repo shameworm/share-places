@@ -16,8 +16,6 @@
 
 // import MarkerImg from "../../../assets/marker.svg";
 
-
-
 // interface PlaceMapProps {
 //   center: { lat: number; lng: number };
 //   zoom: number;

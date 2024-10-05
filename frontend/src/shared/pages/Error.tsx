@@ -1,6 +1,6 @@
-import { useRouteError, isRouteErrorResponse } from "react-router-dom";
+import { useRouteError, isRouteErrorResponse } from 'react-router-dom';
 
-import MainNavigation from "../components/Navigation/MainNavigation";
+import MainNavigation from '../components/Navigation/MainNavigation';
 
 const ErrorPage: React.FC = () => {
   const error = useRouteError();
@@ -10,11 +10,11 @@ const ErrorPage: React.FC = () => {
     errorMessage = error.data.message || error.statusText;
   } else if (error instanceof Error) {
     errorMessage = error.message;
-  } else if (typeof error === "string") {
+  } else if (typeof error === 'string') {
     errorMessage = error;
   } else {
     console.error(error);
-    errorMessage = "Unknown error";
+    errorMessage = 'Unknown error';
   }
 
   return (

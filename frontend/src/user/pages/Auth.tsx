@@ -1,13 +1,13 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from 'react-router-dom';
 
-import Card from "../../shared/components/UIElements/Card";
-import Login from "../components/Login";
-import Signup from "../components/Signup";
+import Card from '../../shared/components/UIElements/Card';
+import Login from '../components/Login';
+import Signup from '../components/Signup';
 
 const Auth: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const isLogin = searchParams.get("mode") === "login";
-  const formClasses = "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4";
+  const isLogin = searchParams.get('mode') === 'login';
+  const formClasses = 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4';
 
   return (
     <Card className="px-2">

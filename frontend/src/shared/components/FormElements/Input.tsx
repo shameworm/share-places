@@ -1,5 +1,5 @@
-import { ForwardedRef, forwardRef } from "react";
-import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
+import { ForwardedRef, forwardRef } from 'react';
+import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
 interface InputProps {
   label: string;
   type?: string;
@@ -21,7 +21,7 @@ const Input: React.ForwardRefRenderFunction<
           {...props}
           ref={ref as ForwardedRef<HTMLTextAreaElement>}
           className={`shadow appearance-none whitespace-nowrap border rounded w-full py-3 h-40 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-            error && "border-[#f05a5a]"
+            error && 'border-[#f05a5a]'
           }`}
           value={value as string}
         ></textarea>
@@ -32,7 +32,7 @@ const Input: React.ForwardRefRenderFunction<
           type={type}
           ref={ref as ForwardedRef<HTMLInputElement>}
           className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-            error && "border-[#f05a5a]"
+            error && 'border-[#f05a5a]'
           }`}
           value={value as string}
         />
