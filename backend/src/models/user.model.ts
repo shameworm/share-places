@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, SchemaDefinitionProperty } from "mongoose";
 import mongooseUniqueValidator from "mongoose-unique-validator";
 interface IUser extends Document {
   id: string;
@@ -6,7 +6,7 @@ interface IUser extends Document {
   email: string;
   password: string;
   image: string;
-  places: string;
+  places: SchemaDefinitionProperty<string>[];
 }
 
 const userSchema = new Schema<IUser>({
@@ -14,10 +14,12 @@ const userSchema = new Schema<IUser>({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, minlength: 5 },
   image: { type: String, required: true },
-  places: { type: String, require: true },
+  places: {
+    type: [{ type: mongoose.Types.ObjectId, ref: "Place" }],
+    default: [],
+  },
 });
 
 userSchema.plugin(mongooseUniqueValidator);
 
-const User = mongoose.model<IUser>("User", userSchema);
-export default User;
+export const User = mongoose.model<IUser>("User", userSchema);

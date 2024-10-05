@@ -1,9 +1,8 @@
-import { v4 as uuid } from "uuid";
 import { validationResult } from "express-validator";
 import { Request, Response, NextFunction } from "express";
 
 import { HttpError } from "../models/http-error";
-import User from "../models/user.model";
+import { User } from "../models/user.model";
 
 export const getUsers = async (
   req: Request,
@@ -57,7 +56,6 @@ export const signup = async (
     email,
     image: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
     password,
-    places: 0,
   });
 
   try {

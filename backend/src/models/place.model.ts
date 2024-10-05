@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, SchemaDefinitionProperty } from "mongoose";
 
 interface ILocation {
   lat: number;
@@ -13,7 +13,7 @@ interface IPlace extends Document {
   location: {
     location: ILocation;
   };
-  creator: string;
+  creator: SchemaDefinitionProperty<string>;
 }
 
 const placeSchema = new Schema<IPlace>({
@@ -27,8 +27,7 @@ const placeSchema = new Schema<IPlace>({
       lng: { type: Number, required: true },
     },
   },
-  creator: { type: String, required: true },
+  creator: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
 });
 
-const Place = mongoose.model<IPlace>("Place", placeSchema);
-export default Place;
+export const Place = mongoose.model<IPlace>("Place", placeSchema);
