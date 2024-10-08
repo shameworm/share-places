@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, SchemaDefinitionProperty } from "mongoose";
+import mongoose, { Document, Schema, Types } from "mongoose";
 import mongooseUniqueValidator from "mongoose-unique-validator";
 interface IUser extends Document {
   id: string;
@@ -6,7 +6,7 @@ interface IUser extends Document {
   email: string;
   password: string;
   image: string;
-  places: SchemaDefinitionProperty<string>[];
+  places: Types.ObjectId[];
 }
 
 const userSchema = new Schema<IUser>({
@@ -15,7 +15,7 @@ const userSchema = new Schema<IUser>({
   password: { type: String, required: true, minlength: 5 },
   image: { type: String, required: true },
   places: {
-    type: [{ type: mongoose.Types.ObjectId, ref: "Place" }],
+    type: [{ type: Schema.Types.ObjectId, ref: "Place" }],
     default: [],
   },
 });
