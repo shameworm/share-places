@@ -1,19 +1,22 @@
-import { useRef } from 'react';
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useRef, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
-import ForwardedInput from '../../shared/components/FormElements/Input';
-import Button from '../../shared/components/FormElements/Button';
+import { Link, redirect } from "react-router-dom";
+
+import axios, { AxiosError } from "axios";
+import Button from "../../shared/components/FormElements/Button";
+import ForwardedInput from "../../shared/components/FormElements/Input";
 
 const Input = ForwardedInput;
-const Signup: React.FC<{ isLogin: boolean; classes: string }> = ({
-  isLogin,
-  classes,
-}) => {
+const Signup: React.FC<{ classes: string }> = ({ classes }) => {
   const emailRef = useRef<HTMLInputElement | null>();
   const loginRef = useRef<HTMLInputElement | null>();
   const passwordRef = useRef<HTMLInputElement | null>();
   const confirmPasswordRef = useRef<HTMLInputElement | null>();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const {
     register,
@@ -22,49 +25,73 @@ const Signup: React.FC<{ isLogin: boolean; classes: string }> = ({
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: unknown) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/signup`,
+        {
+          name: data.login,
+          email: data.email,
+          password: data.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      const responseData = response.data;
+      console.log(responseData);
+      setIsLoading(false);
+      return redirect("/auth?mode=login");
+    } catch (error) {
+      const axiosError = error as AxiosError<{ message: string }>;
+      setError(axiosError?.response?.data?.message || "An error occurred");
+      setIsLoading(false);
+    }
   };
 
-  const { ref: refEmail, ...restEmailProps } = register('email', {
+  const { ref: refEmail, ...restEmailProps } = register("email", {
     required: {
       value: true,
-      message: 'This field is required!',
+      message: "This field is required!",
     },
     pattern: {
       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-      message: 'invalid email address',
+      message: "invalid email address",
     },
   });
 
-  const { ref: refLogin, ...restLoginProps } = register('login', {
+  const { ref: refLogin, ...restLoginProps } = register("login", {
     required: {
       value: true,
-      message: 'This field is required!',
+      message: "This field is required!",
     },
   });
 
-  const { ref: refPassword, ...restPasswordProps } = register('password', {
+  const { ref: refPassword, ...restPasswordProps } = register("password", {
     required: {
       value: true,
-      message: 'This field is required!',
+      message: "This field is required!",
     },
     minLength: {
       value: 5,
-      message: 'Password is to short. (5 characters minimum)',
+      message: "Password is to short. (5 characters minimum)",
     },
   });
 
   const { ref: refConfirmPassword, ...restConfirmPasswordProps } = register(
-    'confirmPassword',
+    "confirmPassword",
     {
       required: {
         value: true,
-        message: 'This field is required!',
+        message: "This field is required!",
       },
       validate: (val: string) => {
-        if (watch('password') != val) {
-          return 'Your passwords do no match';
+        if (watch("password") != val) {
+          return "Your passwords do no match";
         }
       },
     },
@@ -114,11 +141,9 @@ const Signup: React.FC<{ isLogin: boolean; classes: string }> = ({
       ></Input>
 
       <Button inverse type="submit">
-        {isLogin ? 'Login' : 'Signup'}
+        Signup
       </Button>
-      <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>
-        {isLogin ? 'Signup Instead' : 'Login Instead'}
-      </Link>
+      <Link to="?mode=login">Login Instead</Link>
     </form>
   );
 };
