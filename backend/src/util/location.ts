@@ -2,25 +2,30 @@ import axios from "axios";
 
 import { HttpError } from "../models/http-error";
 
-const API_KEY = process.env["API_KEY"];
-
 export async function getCoordsForAddress(address: string) {
-  const response = await axios.get(
-    `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-      address,
-    )}&key=${API_KEY}`,
-  );
-
-  const data = response.data;
-
-  if (!data || data.status === "ZERO_RESULTS") {
-    const error = new HttpError(
-      "Could not find location for the specified address.",
-      422,
+  try {
+    const response = await axios.get(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+        address,
+      )}`,
     );
-    throw error;
-  }
 
-  const coordinates = data.results[0].geometry.location;
-  return coordinates;
+    const data = response.data;
+
+    if (!data || data.length === 0) {
+      throw new HttpError(
+        "Could not find location for the specified address.",
+        422,
+      );
+    }
+
+    const coordinates = {
+      lat: parseFloat(data[0].lat),
+      lng: parseFloat(data[0].lon),
+    };
+
+    return coordinates;
+  } catch (error) {
+    throw new HttpError("Failed to fetch coordinates.", 500);
+  }
 }

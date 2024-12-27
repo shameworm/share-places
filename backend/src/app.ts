@@ -10,7 +10,7 @@ import { router as usersRoutes } from "./routes/users-routes";
 
 import { HttpError } from "./models/http-error";
 
-const MONGODB_ACCESS_STR = process.env["MONGODB"];
+const MONGODB_ACCESS_STR = process.env["MONGODB_ACCESS_STR"];
 
 if (!MONGODB_ACCESS_STR) {
   console.error("Error: MONGODB_ACCESS_STR is not defined.");
@@ -49,7 +49,14 @@ app.use((error: HttpError, req: Request, res: Response, next: NextFunction) => {
 });
 
 mongoose
-  .connect(MONGODB_ACCESS_STR)
+  .connect(MONGODB_ACCESS_STR, {
+    dbName: "share-places",
+    serverApi: {
+      version: "1",
+      strict: true,
+      deprecationErrors: true,
+    },
+  })
   .then(() => {
     app.listen(5000);
   })
