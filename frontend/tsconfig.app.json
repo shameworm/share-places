@@ -27,5 +27,5 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "index.d.ts", "tailwind.config.ts"]
 }

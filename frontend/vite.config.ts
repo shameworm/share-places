@@ -4,6 +4,11 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react()],
+  css: {
+    modules: {
+      localsConvention: "camelCase",
+    },
+  },
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "./src"),
