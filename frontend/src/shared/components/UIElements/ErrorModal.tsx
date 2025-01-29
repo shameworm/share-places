@@ -7,15 +7,12 @@ type ErrorModalProps = {
   error: string;
 };
 
-const ErrorModal = (props) => {
+const ErrorModal = ({ onClear, error }: ErrorModalProps) => {
   return (
-    <Modal
-      onClose={onClear}
-      header="An Error Occurred!"
-      show={!!props.error}
-      footer={<Button onClick={props.onClear}>Okay</Button>}
-    >
-      <p>{props.error}</p>
+    <Modal onClose={onClear} show={!!error}>
+      <h1>An Error Ocurred!</h1>
+      <p>{error}</p>
+      <Button onClick={onClear}>Okay</Button>
     </Modal>
   );
 };

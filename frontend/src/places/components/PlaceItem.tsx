@@ -45,7 +45,7 @@ const PlaceItem: React.FC<Place> = ({
 
   return (
     <>
-      <Modal showMap={showMap} onClose={handleCloseMap}>
+      <Modal show={showMap} onClose={handleCloseMap}>
         <header>{address}</header>
         <div className="modal_wrapper">
           <PlaceMap center={coordinates} zoom={16} />
@@ -53,7 +53,7 @@ const PlaceItem: React.FC<Place> = ({
         <Button onClick={handleCloseMap}>Close</Button>
       </Modal>
 
-      <Modal showMap={showDeleteModal} onClose={handleCloseDelete}>
+      <Modal show={showDeleteModal} onClose={handleCloseDelete}>
         <header> You want to delete this shared place?</header>
         <div className="modal_wrapper text-center max-h-[40rem]">
           <p>

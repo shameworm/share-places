@@ -1,14 +1,14 @@
-import { Transition } from '@headlessui/react';
-import { useEffect, useRef, ReactNode } from 'react';
-import { createPortal } from 'react-dom';
+import { Transition } from "@headlessui/react";
+import { useEffect, useRef, ReactNode } from "react";
+import { createPortal } from "react-dom";
 
-import Backdrop from './Backdrop';
+import Backdrop from "./Backdrop";
 
 const Modal: React.FC<{
   children: ReactNode;
   onClose: () => void;
-  showMap: boolean;
-}> = ({ children, onClose, showMap }) => {
+  show: boolean;
+}> = ({ children, onClose, show }) => {
   const dialog = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Modal: React.FC<{
 
   return createPortal(
     <Transition
-      show={showMap}
+      show={show}
       enter="transition-opacity ease-out duration-300"
       enterFrom="opacity-0"
       enterTo="opacity-100"
@@ -35,7 +35,7 @@ const Modal: React.FC<{
         {children}
       </dialog>
     </Transition>,
-    document.getElementById('modal-hook')!,
+    document.getElementById("modal-hook")!,
   );
 };
 
