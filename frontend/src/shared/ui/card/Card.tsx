@@ -26,20 +26,6 @@ const CardHeader = React.forwardRef<
 ));
 CardHeader.displayName = "CardHeader";
 
-export const CardImage = React.forwardRef<
-  HTMLImageElement,
-  React.ImgHTMLAttributes<HTMLImageElement>
->(({ src, alt, className, ...properties }, reference) => (
-  <img
-    src={src}
-    alt={alt}
-    ref={reference}
-    className={cn("aspect-square rounded-lg object-cover", className)}
-    {...properties}
-  />
-));
-CardImage.displayName = "CardImage";
-
 const CardTitle = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
