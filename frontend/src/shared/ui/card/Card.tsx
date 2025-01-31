@@ -8,10 +8,7 @@ const Card = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "rounded-lg border border-neutral-200 bg-white text-neutral-950 shadow-sm dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50",
-      className,
-    )}
+    className={cn("rounded-lg bg-card text-card-foreground", className)}
     {...props}
   />
 ));
@@ -28,6 +25,20 @@ const CardHeader = React.forwardRef<
   />
 ));
 CardHeader.displayName = "CardHeader";
+
+export const CardImage = React.forwardRef<
+  HTMLImageElement,
+  React.ImgHTMLAttributes<HTMLImageElement>
+>(({ src, alt, className, ...properties }, reference) => (
+  <img
+    src={src}
+    alt={alt}
+    ref={reference}
+    className={cn("aspect-square rounded-lg object-cover", className)}
+    {...properties}
+  />
+));
+CardImage.displayName = "CardImage";
 
 const CardTitle = React.forwardRef<
   HTMLDivElement,
@@ -50,7 +61,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("text-sm text-neutral-500 dark:text-neutral-400", className)}
+    className={cn("text-sm text-muted-foreground", className)}
     {...props}
   />
 ));

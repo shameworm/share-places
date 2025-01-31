@@ -7,6 +7,7 @@ export const router = createBrowserRouter([
     id: "root",
     children: [
       {
+        index: true,
         element: <RootLayout />,
       },
     ],
