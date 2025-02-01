@@ -20,7 +20,7 @@ export function PageLayout({
   return (
     <div
       className={cn(
-        "container flex min-h-screen min-w-96 max-w-full flex-col divide-y divide-muted px-4 *:py-4",
+        "container flex min-h-screen min-w-96 max-w-full flex-col *:py-4 *:mx-16",
         className,
       )}
       {...properties}
