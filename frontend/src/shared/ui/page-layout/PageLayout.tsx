@@ -4,6 +4,7 @@ import { cn } from "~/shared/lib";
 
 import { Skeleton } from "../skeleton";
 import { Toaster } from "../sonner";
+import { Separator } from "@radix-ui/react-separator";
 
 type Properties = React.HTMLAttributes<HTMLDivElement> & {
   topBar?: React.ReactNode;
@@ -20,12 +21,13 @@ export function PageLayout({
   return (
     <div
       className={cn(
-        "container flex min-h-screen min-w-96 max-w-full flex-col *:py-4 *:mx-16",
+        "container flex min-h-screen max-w-full flex-col *:py-4 *:mx-16",
         className,
       )}
       {...properties}
     >
       {topBar}
+      <Separator className="bg-border" />
       <div className="flex gap-4">
         {sideBar}
         <main className="w-full">

@@ -1,9 +1,19 @@
 import { NavLink } from "react-router-dom";
 import { Button } from "~/shared/ui/button";
 
-export function NavLinks() {
+interface NavLinksProps {
+  isMobile?: boolean;
+}
+
+export function NavLinks({ isMobile = false }: NavLinksProps) {
   return (
-    <ul className="flex justify-between items-center gap-4 ">
+    <ul
+      className={`${
+        isMobile
+          ? "flex flex-col gap-4"
+          : "hidden lg:flex lg:flex-row lg:items-center lg:gap-4"
+      }`}
+    >
       <li>
         <NavLink to="/">
           <Button variant="link">All users</Button>
