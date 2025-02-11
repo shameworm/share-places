@@ -6,6 +6,16 @@ interface NavLinksProps {
 }
 
 export function NavLinks({ isMobile = false }: NavLinksProps) {
+  const buttonClass = isMobile ? "w-full " : "text-lg";
+  const buttonVariant = isMobile ? "secondary" : "link";
+
+  const links = [
+    { to: "/", label: "All users" },
+    { to: "/1/places", label: "My places" },
+    { to: "/places/new", label: "Add Place" },
+    { to: "/auth", label: "Authenticate" },
+  ];
+
   return (
     <ul
       className={`${
@@ -14,28 +24,19 @@ export function NavLinks({ isMobile = false }: NavLinksProps) {
           : "hidden lg:flex lg:flex-row lg:items-center lg:gap-4"
       }`}
     >
+      {links.map(({ to, label }) => (
+        <li key={to}>
+          <NavLink to={to}>
+            <Button variant={buttonVariant} className={`${buttonClass} gap-4`}>
+              {label}
+            </Button>
+          </NavLink>
+        </li>
+      ))}
       <li>
-        <NavLink to="/">
-          <Button variant="link">All users</Button>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/1/places">
-          <Button variant="link">My places</Button>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/places/new">
-          <Button variant="link">Add Place</Button>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/auth">
-          <Button variant="link">Authenticate</Button>
-        </NavLink>
-      </li>
-      <li>
-        <Button variant="outline">Logout</Button>
+        <Button variant="outline" className={`${buttonClass}  gap-4`}>
+          Logout
+        </Button>
       </li>
     </ul>
   );

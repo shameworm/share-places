@@ -5,6 +5,7 @@ import {
   SheetTrigger,
 } from "~/shared/ui/sheet";
 import { NavLinks } from "./NavLinks";
+import { Logo } from "~/shared/ui/logo";
 
 export function MobileSheet() {
   const hamburger = (
@@ -19,9 +20,10 @@ export function MobileSheet() {
     <Sheet>
       <SheetTrigger>{hamburger}</SheetTrigger>
       <SheetContent side="right">
-        <SheetHeader>
-          <NavLinks isMobile />
+        <SheetHeader className="text-left my-8">
+          <Logo />
         </SheetHeader>
+        <NavLinks isMobile />
       </SheetContent>
     </Sheet>
   );

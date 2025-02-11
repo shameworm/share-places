@@ -14,9 +14,9 @@ export function Logo({ className, ...properties }: Properties) {
       >
         <LogoImage className="h-8 w-8 md:h-20 md:w-20 text-accent" />
         <Separator orientation="vertical" className="h-8 md:h-20 bg-accent " />
-        <div className="flex flex-col font-bold uppercase">
-          <p className="text-3xl">Share</p>
-          <p className="text-xl">Your Places</p>
+        <div className="flex flex-col font-bold uppercase *:text-lg">
+          <p className="md:text-3xl">Share</p>
+          <p className="md-text-xl">Your Places</p>
         </div>
       </div>
     </Link>

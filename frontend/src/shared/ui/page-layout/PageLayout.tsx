@@ -27,7 +27,9 @@ export function PageLayout({
       {...properties}
     >
       {topBar}
-      <Separator className="bg-border" />
+      <div className="py-0 mx-0">
+        <Separator className="bg-border h-1" />
+      </div>
       <div className="flex gap-4">
         {sideBar}
         <main className="w-full">
