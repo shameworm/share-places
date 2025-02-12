@@ -8,7 +8,10 @@ import { getInitials } from "../lib";
 export function UserCard({ id, name, image, places }: UserProperties) {
   const initials = getInitials(name);
   return (
-    <Card key={id} className="flex items-center">
+    <Card
+      key={id}
+      className="flex items-center hover:bg-primary transition hover:duration-500"
+    >
       <Avatar className="mx-4">
         {image ? (
           <AvatarImage src={image} />
