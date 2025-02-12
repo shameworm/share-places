@@ -24,8 +24,8 @@ export function UserCard({ id, name, image, places }: UserProperties) {
           <CardTitle>{name}</CardTitle>
         </CardHeader>
         <CardFooter>
-          <p>
-            {places} {places === 1 ? "Place" : "Places"}
+          <p className="text-md">
+            Share places: <span className="font-bold">{places}</span>
           </p>
         </CardFooter>
       </div>
