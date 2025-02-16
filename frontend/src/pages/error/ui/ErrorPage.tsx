@@ -1,4 +1,4 @@
-import { TopBarWidget } from "~/shared/widgets/top-bar/TopBarWidget";
+import { TopBarWidget } from "~/widgets/top-bar";
 import { useErrorPage } from "../lib";
 import { PageLayout } from "~/shared/ui/page-layout";
 import { useRouteError } from "react-router-dom";
