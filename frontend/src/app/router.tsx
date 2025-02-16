@@ -15,6 +15,12 @@ const CreatePlace = lazy(() =>
   })),
 );
 
+const UserPlaces = lazy(() =>
+  import("~/pages/user-places").then((module) => ({
+    default: module.UserPlacesPage,
+  })),
+);
+
 const ErrorPage = lazy(() =>
   import("~/pages/error").then((module) => ({
     default: module.ErrorPage,
@@ -36,6 +42,10 @@ export const router = createBrowserRouter([
           {
             path: "/places/new",
             element: <CreatePlace />,
+          },
+          {
+            path: "/:userId/places",
+            element: <UserPlaces />,
           },
         ],
       },

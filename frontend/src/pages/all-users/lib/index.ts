@@ -1,1 +1,1 @@
-export { USERS } from "./USERS";
+export { DUMMY_USERS } from "./DUMMY_USERS";
