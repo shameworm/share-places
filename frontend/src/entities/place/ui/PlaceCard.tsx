@@ -6,7 +6,6 @@ import {
   CardTitle,
 } from "~/shared/ui/card";
 import { PlaceProperties } from "./place-properties";
-import { Button } from "~/shared/ui/button";
 
 export function PlaceCard({
   id,
@@ -16,6 +15,7 @@ export function PlaceCard({
   coordinates,
   image,
   creatorId,
+  viewMapBtn,
 }: PlaceProperties) {
   console.log(coordinates, creatorId);
   return (
@@ -27,9 +27,7 @@ export function PlaceCard({
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardFooter className="flex justify-between items-center gap-2">
-        <Button size="lg" variant="primary" className="font-bold">
-          <p>VIEW ON MAP</p>
-        </Button>
+        {viewMapBtn}
       </CardFooter>
     </Card>
   );

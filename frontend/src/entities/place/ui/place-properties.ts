@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type PlaceProperties = {
   id: string;
   image: string;
@@ -9,4 +11,5 @@ export type PlaceProperties = {
     lat: number;
     lng: number;
   };
+  viewMapBtn?: ReactNode;
 };
