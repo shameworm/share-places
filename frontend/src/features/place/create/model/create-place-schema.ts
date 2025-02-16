@@ -5,8 +5,8 @@ export const createPlaceSchema = z.object({
   description: z
     .string()
     .max(500, "Description is too long.")
-    .min(3, "Description must be at least 3 characters"),
-  location: z.string().min(5, "Loaction must be at least 5 characters"),
+    .min(5, "Description must be at least 5 characters"),
+  location: z.string().min(5, "Location must be at least 5 characters"),
 });
 
 export type CreatePlaceFormValues = z.infer<typeof createPlaceSchema>;
