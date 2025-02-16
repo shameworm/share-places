@@ -7,7 +7,6 @@ import {
 } from "~/shared/ui/card";
 import { PlaceProperties } from "./place-properties";
 import { Button } from "~/shared/ui/button";
-import { Map } from "lucide-react";
 
 export function PlaceCard({
   id,
@@ -29,8 +28,7 @@ export function PlaceCard({
       </CardHeader>
       <CardFooter className="flex justify-between items-center gap-2">
         <Button size="lg" variant="primary" className="font-bold">
-          <p className="hidden md:block">VIEW ON MAP</p>
-          <Map className="md:hidden" />
+          <p>VIEW ON MAP</p>
         </Button>
       </CardFooter>
     </Card>
