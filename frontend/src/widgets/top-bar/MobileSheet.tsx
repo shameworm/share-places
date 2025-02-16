@@ -20,8 +20,8 @@ export function MobileSheet() {
     <Sheet>
       <SheetTrigger>{hamburger}</SheetTrigger>
       <SheetContent side="right">
-        <SheetHeader className="text-left my-8">
-          <Logo />
+        <SheetHeader className="my-8 ">
+          <Logo className="*:h-20 [&>*:first-child]:w-20 [&>*:last-child]:w-20" />
         </SheetHeader>
         <NavLinks isMobile />
       </SheetContent>
