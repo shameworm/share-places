@@ -1,15 +1,8 @@
 import { useSearchParams } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
 import { Card } from "~/shared/ui/card";
 import { LoginForm, SignupForm } from "~/features/auth";
 
 export function AuthPage() {
-  const [searchParams] = useSearchParams();
-
-  const mode = searchParams.get("mode");
-
-  const isLogin = mode === "login" || !mode;
-  const isSignup = mode === "signup";
   const [searchParams] = useSearchParams();
 
   const mode = searchParams.get("mode");
