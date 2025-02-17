@@ -10,7 +10,7 @@ export const useCreatePlace = () => {
     defaultValues: {
       title: "",
       description: "",
-      location: "",
+      address: "",
     },
   });
 

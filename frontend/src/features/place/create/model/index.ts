@@ -1,4 +1,6 @@
 export {
   type CreatePlaceFormValues,
   createPlaceSchema,
-} from "./create-place-schema";
+} from "./schemas/create-place-schema";
+
+export { type CreateFormFieldProperties } from "./types";

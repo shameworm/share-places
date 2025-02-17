@@ -1,5 +1,5 @@
 import { BaseField } from "~/shared/ui/form";
-import { CreateFormFieldProperties } from "./create-form-field-properties";
+import { CreateFormFieldProperties } from "../model/types";
 import { CreatePlaceFormValues } from "../model";
 
 export function TitleField({
