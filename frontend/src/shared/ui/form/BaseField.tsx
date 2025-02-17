@@ -27,7 +27,7 @@ type BaseFieldProps<T extends FieldValues> = {
   label: string;
   placeholder: string;
   defaultValue?: string;
-  inputType?: "textarea" | "input";
+  inputType?: "textarea" | "input" | "password";
 };
 
 export function BaseField<T extends FieldValues>({
@@ -44,6 +44,8 @@ export function BaseField<T extends FieldValues>({
     switch (inputType) {
       case "textarea":
         return <Textarea {...field} placeholder={placeholder} />;
+      case "password":
+        return <Input {...field} placeholder={placeholder} type="password" />;
       default:
         return <Input {...field} placeholder={placeholder} />;
     }
