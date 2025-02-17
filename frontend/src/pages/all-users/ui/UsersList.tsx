@@ -4,7 +4,7 @@ import { Card } from "~/shared/ui/card";
 import { Link } from "react-router-dom";
 
 export function UserList({ users }: { users: UserProperties[] }) {
-  if (users.length <= 0) {
+  if (!users || users.length <= 0) {
     return (
       <Card className="mx-auto text-center text-3xl bg-transparent">
         No users found.
@@ -20,7 +20,7 @@ export function UserList({ users }: { users: UserProperties[] }) {
               id={user.id}
               image={user.image}
               name={user.name}
-              places={user.places}
+              places={Array.isArray(user.places) ? user.places.length : 0}
             />
           </Link>
         </li>

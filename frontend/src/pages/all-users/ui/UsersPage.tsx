@@ -1,6 +1,11 @@
-import { DUMMY_USERS } from "../lib";
+import { useGetUsers } from "~/features/user/get";
 import { UserList } from "./UsersList";
+import { Skeleton } from "~/shared/ui/skeleton";
 
 export function UsersPage() {
-  return <UserList users={DUMMY_USERS} />;
+  const { data: users, isLoading } = useGetUsers();
+
+  if (isLoading) return <Skeleton type="page" />;
+
+  return <UserList users={users} />;
 }
