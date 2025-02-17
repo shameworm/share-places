@@ -1,0 +1,1 @@
+export { UserPlacesPage } from "./ui";
