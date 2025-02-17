@@ -9,6 +9,12 @@ const UserPage = lazy(() =>
   })),
 );
 
+const AuthPage = lazy(() =>
+  import("~/pages/auth").then((module) => ({
+    default: module.AuthPage,
+  })),
+);
+
 const CreatePlace = lazy(() =>
   import("~/pages/create-place").then((module) => ({
     default: module.CreatePlacePage,
@@ -38,6 +44,10 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <UserPage />,
+          },
+          {
+            path: "/auth",
+            element: <AuthPage />,
           },
           {
             path: "/places/new",
