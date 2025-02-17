@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useAuthStore } from "~/features/auth";
 import { Button } from "~/shared/ui/button";
 
 interface NavLinksProps {
@@ -8,13 +9,14 @@ interface NavLinksProps {
 export function NavLinks({ isMobile = false }: NavLinksProps) {
   const buttonClass = isMobile ? "w-full " : "text-lg";
   const buttonVariant = isMobile ? "secondary" : "link";
+  const { isLoggedIn, logout } = useAuthStore();
 
   const links = [
     { to: "/", label: "All users" },
-    { to: "/1/places", label: "My places" },
-    { to: "/places/new", label: "Add Place" },
-    { to: "/auth", label: "Authenticate" },
-  ];
+    isLoggedIn && { to: "/u1/places", label: "My places" },
+    isLoggedIn && { to: "/places/new", label: "Add Place" },
+    !isLoggedIn && { to: "/auth", label: "Authenticate" },
+  ].filter((link): link is { to: string; label: string } => Boolean(link));
 
   return (
     <ul
@@ -33,11 +35,17 @@ export function NavLinks({ isMobile = false }: NavLinksProps) {
           </NavLink>
         </li>
       ))}
-      <li>
-        <Button variant="outline" className={`${buttonClass}  gap-4`}>
-          Logout
-        </Button>
-      </li>
+      {isLoggedIn && (
+        <li>
+          <Button
+            variant="outline"
+            className={`${buttonClass}  gap-4`}
+            onClick={logout}
+          >
+            Logout
+          </Button>
+        </li>
+      )}
     </ul>
   );
 }
