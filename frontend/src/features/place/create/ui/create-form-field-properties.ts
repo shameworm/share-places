@@ -1,6 +1,5 @@
-import { UseFormReturn } from "react-hook-form";
-import { CreatePlaceFormValues } from "../model";
+import { FieldValues, UseFormReturn } from "react-hook-form";
 
-export type CreateFormFieldProperties = {
-  form: UseFormReturn<CreatePlaceFormValues, unknown, undefined> | null;
+export type CreateFormFieldProperties<T extends FieldValues> = {
+  form: UseFormReturn<T, unknown, undefined>;
 };

@@ -1,8 +1,10 @@
 import { useCreatePlace } from "../lib";
 
-import { TitleField } from "./TitleField";
-import { LocationField } from "./LocationField";
-import { DescritionField } from "./DescriptionField";
+import {
+  TitleField,
+  DescriptionField,
+  AddressField,
+} from "./CreatePlaceFormFileds";
 
 import { Form } from "~/shared/ui/form";
 import { Button } from "~/shared/ui/button";
@@ -22,8 +24,8 @@ export function CreatePlaceForm() {
 
         <div className="flex flex-col gap-4">
           <TitleField form={form} />
-          <DescritionField form={form} />
-          <LocationField form={form} />
+          <DescriptionField form={form} />
+          <AddressField form={form} />
         </div>
 
         <Button
