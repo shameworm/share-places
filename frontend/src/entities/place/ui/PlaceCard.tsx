@@ -12,15 +12,17 @@ export function PlaceCard({
   title,
   description,
   address,
-  coordinates,
   image,
-  creatorId,
+  creator,
   viewMapBtn,
 }: PlaceProperties) {
-  console.log(coordinates, creatorId);
   return (
     <Card className="flex flex-col items-center" key={id}>
-      <img src={image} alt={title} className="w-full h-full object-cover" />
+      <img
+        src={image}
+        alt={`${title} by ${creator}`}
+        className="w-full h-full object-cover"
+      />
       <CardHeader className="mx-0 text-center">
         <CardTitle>{title}</CardTitle>
         <p className="font-semibold">{address}</p>

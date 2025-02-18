@@ -10,9 +10,7 @@ interface IPlace extends Document {
   description: string;
   image: string;
   address: string;
-  location: {
-    location: ILocation;
-  };
+  location: ILocation;
   creator: Types.ObjectId;
 }
 
@@ -22,10 +20,8 @@ const placeSchema = new Schema<IPlace>({
   image: { type: String, required: true },
   address: { type: String, required: true },
   location: {
-    location: {
-      lat: { type: Number, required: true },
-      lng: { type: Number, required: true },
-    },
+    lat: { type: Number, required: true },
+    lng: { type: Number, required: true },
   },
   creator: { type: Schema.Types.ObjectId, required: true, ref: "User" },
 });

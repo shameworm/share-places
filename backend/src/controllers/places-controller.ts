@@ -94,10 +94,8 @@ export const createPlace = async (
     description,
     address,
     location: {
-      location: {
-        lat: coordinates.lat,
-        lng: coordinates.lng,
-      },
+      lat: coordinates.lat,
+      lng: coordinates.lng,
     },
     image:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Empire_State_Building_%28aerial_view%29.jpg/800px-Empire_State_Building_%28aerial_view%29.jpg",

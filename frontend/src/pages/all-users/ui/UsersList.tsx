@@ -1,8 +1,13 @@
-import { UserProperties } from "~/entities/user/ui/user-properties";
 import { UserCard } from "~/entities/user";
+
+import { UserProperties } from "./user-properties";
+import { useGridCols } from "../lib";
+
 import { Card } from "~/shared/ui/card";
 
 export function UserList({ users }: { users: UserProperties[] }) {
+  const gridCols = useGridCols(users.length);
+
   if (!users || users.length <= 0) {
     return (
       <Card className="mx-auto text-center text-3xl bg-transparent">
@@ -10,10 +15,12 @@ export function UserList({ users }: { users: UserProperties[] }) {
       </Card>
     );
   }
+
   return (
-    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-0 mx-auto list-none">
+    <ul className={`grid ${gridCols} gap-4 p-0`}>
       {users.map((user: UserProperties) => (
         <UserCard
+          key={user.id}
           id={user.id}
           image={user.image}
           name={user.name}

@@ -1,11 +1,11 @@
-import { useParams } from "react-router-dom";
-import { DUMMY_PLACES } from "../lib";
+import { useUserPlacesPage } from "../api";
 import { PlaceList } from "./PlaceList";
 
+import { Skeleton } from "~/shared/ui/skeleton";
+
 export function UserPlacesPage() {
-  const { userId } = useParams();
-  const loadedPlaces = DUMMY_PLACES.filter(
-    (place) => place.creatorId === userId,
-  );
-  return <PlaceList places={loadedPlaces} />;
+  const { data: places, isLoading } = useUserPlacesPage();
+  if (isLoading) return <Skeleton type="page" />;
+
+  return <PlaceList places={places} />;
 }

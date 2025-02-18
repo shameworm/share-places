@@ -61,6 +61,7 @@ export const signup = async (
   try {
     await createdUser?.save();
   } catch (err) {
+    console.log(err);
     const error = new HttpError("Something went wrong, signup failed.", 500);
     return next(error);
   }

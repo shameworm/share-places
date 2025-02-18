@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export type PlaceProperties = {
   id: string;
   image: string;
@@ -7,5 +5,8 @@ export type PlaceProperties = {
   description: string;
   address: string;
   creator: string;
-  viewMapBtn?: ReactNode;
+  location: {
+    lat: number;
+    lng: number;
+  };
 };
