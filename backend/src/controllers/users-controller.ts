@@ -54,7 +54,7 @@ export const signup = async (
   const createdUser = new User({
     name,
     email,
-    image: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
+    image: "",
     password,
   });
 

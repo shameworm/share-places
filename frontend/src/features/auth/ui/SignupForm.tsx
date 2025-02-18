@@ -1,4 +1,4 @@
-import { useSignup } from "../lib";
+import { useSignup } from "../api";
 
 import {
   EmailSignupField,
