@@ -1,4 +1,4 @@
-import { useCreatePlace } from "../lib";
+import { useCreatePlace } from "../api";
 
 import {
   TitleField,

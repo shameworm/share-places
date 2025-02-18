@@ -17,7 +17,7 @@ interface IPlace extends Document {
 const placeSchema = new Schema<IPlace>({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  image: { type: String, required: true },
+  image: { type: String },
   address: { type: String, required: true },
   location: {
     lat: { type: Number, required: true },
