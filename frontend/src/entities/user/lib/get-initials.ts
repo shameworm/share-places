@@ -6,6 +6,5 @@ export function getInitials(name: string): string {
   const initials = nameParts
     .map((part) => part.charAt(0).toUpperCase())
     .join("");
-  console.log(initials);
   return initials;
 }
