@@ -3,7 +3,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "~/shared/lib";
 
 const variants = cva(
-  "h-auto w-full animate-pulse p-4 opacity-20 *:min-h-4 *:rounded-md *:bg-muted-foreground",
+  "h-auto w-full animate-pulse p-4 opacity-20 *:min-h-4 *:rounded-md *:bg-muted",
   {
     variants: {
       type: {

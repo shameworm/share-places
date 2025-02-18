@@ -6,7 +6,7 @@ const fetchUsers = async () => {
   return response.data.users;
 };
 
-export function useGetUsers() {
+export function useAllUsersPage() {
   return useQuery({
     queryKey: ["users"],
     queryFn: fetchUsers,
