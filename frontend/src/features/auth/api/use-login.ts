@@ -2,44 +2,44 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 import { AxiosError } from "axios";
-
-import { signupSchema, SignupFormValues } from "../model";
+import { toast } from "sonner";
 
 import { apiClient } from "~/shared/api";
 
-async function signupUser(data: SignupFormValues) {
-  const response = await apiClient.post("/users/signup", data);
+async function loginUser(data: LoginFormValues) {
+  const response = await apiClient.post("/users/login", data);
   return response.data;
 }
 
-export function useSignup() {
+import { useAuthStore, LoginFormValues, loginSchema } from "../model";
+
+export function useLogin() {
+  const { login } = useAuthStore();
   const navigate = useNavigate();
 
-  const form = useForm<SignupFormValues>({
-    resolver: zodResolver(signupSchema),
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
-      name: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
   const { mutateAsync } = useMutation({
-    mutationFn: signupUser,
+    mutationFn: loginUser,
     onSuccess: () => {
-      toast.success("Signup successfully!");
+      toast.success("Login successfully!");
+      login();
       form.reset();
-      navigate("/auth");
+      navigate("/");
     },
     onError: (error: AxiosError) => {
       toast.error((error.response?.data as { message: string }).message);
     },
   });
 
-  async function onSubmit(mutationData: SignupFormValues) {
+  async function onSubmit(mutationData: LoginFormValues) {
     await mutateAsync({ ...mutationData });
   }
 

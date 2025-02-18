@@ -1,4 +1,4 @@
-import { useLogin } from "../lib";
+import { useLogin } from "../api";
 
 import { EmailLoginField, PasswordLoginField } from "./AuthFields";
 
