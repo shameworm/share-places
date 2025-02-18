@@ -8,13 +8,14 @@ interface NavLinksProps {
 }
 
 export function NavLinks({ isMobile = false }: NavLinksProps) {
+  const { userId } = useAuthStore();
   const buttonClass = isMobile ? "w-full " : "text-lg";
   const buttonVariant = isMobile ? "secondary" : "link";
   const { isLoggedIn, logout } = useAuthStore();
 
   const links = [
     { to: "/", label: "All users" },
-    isLoggedIn && { to: "/u1/places", label: "My places" },
+    isLoggedIn && { to: `/${userId}/places`, label: "My places" },
     isLoggedIn && { to: "/places/new", label: "Add Place" },
     !isLoggedIn && { to: "/auth", label: "Authenticate" },
   ].filter((link): link is { to: string; label: string } => Boolean(link));

@@ -36,7 +36,7 @@ export function PageLayout({
           <Suspense fallback={<Skeleton type="page" />}>{children}</Suspense>
         </main>
       </div>
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
     </div>
   );
 }
