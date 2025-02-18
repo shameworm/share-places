@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useAuthStore } from "~/features/auth";
 import { Button } from "~/shared/ui/button";
+import { SheetClose } from "~/shared/ui/sheet";
 
 interface NavLinksProps {
   isMobile?: boolean;
@@ -26,24 +27,42 @@ export function NavLinks({ isMobile = false }: NavLinksProps) {
           : "hidden lg:flex lg:flex-row lg:items-center lg:gap-4"
       }`}
     >
-      {links.map(({ to, label }) => (
-        <li key={to}>
-          <NavLink to={to}>
-            <Button variant={buttonVariant} className={`${buttonClass} gap-4`}>
-              {label}
-            </Button>
-          </NavLink>
-        </li>
-      ))}
+      {links.map(({ to, label }) => {
+        const button = (
+          <Button variant={buttonVariant} className={`${buttonClass} gap-4`}>
+            {label}
+          </Button>
+        );
+
+        return (
+          <li key={to}>
+            <NavLink to={to}>
+              {isMobile ? <SheetClose asChild>{button}</SheetClose> : button}
+            </NavLink>
+          </li>
+        );
+      })}
       {isLoggedIn && (
         <li>
-          <Button
-            variant="outline"
-            className={`${buttonClass}  gap-4`}
-            onClick={logout}
-          >
-            Logout
-          </Button>
+          {isMobile ? (
+            <SheetClose asChild>
+              <Button
+                variant="outline"
+                className={`${buttonClass} gap-4`}
+                onClick={logout}
+              >
+                Logout
+              </Button>
+            </SheetClose>
+          ) : (
+            <Button
+              variant="outline"
+              className={`${buttonClass} gap-4`}
+              onClick={logout}
+            >
+              Logout
+            </Button>
+          )}
         </li>
       )}
     </ul>
