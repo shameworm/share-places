@@ -1,12 +1,19 @@
 import { useParams } from "react-router-dom";
-import { useUpdatePlacePage } from "../api";
+
+import { UpdatePlaceForm } from "~/features/place/update";
 import { Skeleton } from "~/shared/ui/skeleton";
+
+import { useUpdatePlacePage } from "../api";
 
 export function UpdatePlacePage() {
   const { placeId } = useParams();
   const { data, isLoading } = useUpdatePlacePage(placeId!);
 
-  if (isLoading) return <Skeleton type="page" />;
+  if (isLoading || !data) return <Skeleton type="page" />;
   console.log(data);
-  return <div>This is the updatePlacePage</div>;
+  return (
+    <div className="w-full mx-auto max-w-[40rem]">
+      <UpdatePlaceForm initialData={data} />
+    </div>
+  );
 }

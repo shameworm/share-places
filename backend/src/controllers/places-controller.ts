@@ -17,7 +17,7 @@ export const getPlaceById = async (
 
   let place;
   try {
-    place = await Place.findById(placeId);
+    place = await Place.findById(placeId, "-location");
   } catch (err) {
     const error = new HttpError(
       "Something went wrong, could not find a place.",
@@ -150,7 +150,15 @@ export const updatePlace = async (
     );
   }
 
-  const { title, description } = req.body;
+  const { title, description, address } = req.body;
+
+  let coordinates;
+  try {
+    coordinates = await getCoordsForAddress(address);
+  } catch (error) {
+    return next(error);
+  }
+
   const placeId = req.params["pid"];
   let place;
 
@@ -167,6 +175,8 @@ export const updatePlace = async (
   if (place) {
     place.title = title;
     place.description = description;
+    place.address = address;
+    place.location = { lat: coordinates.lat, lng: coordinates.lng };
   }
 
   try {
