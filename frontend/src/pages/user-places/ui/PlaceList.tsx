@@ -12,9 +12,7 @@ export function PlaceList({ places }: { places: PlaceProperties[] }) {
   const { userId: paramsId } = useParams();
   const { userId } = useAuthStore();
 
-  console.log("Current places:", places);
   if (!places || places.length === 0) {
-    console.log("No places found, rendering fallback/");
     return <PlaceFallback isCurrentUser={paramsId === userId} />;
   }
 
