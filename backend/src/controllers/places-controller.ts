@@ -6,35 +6,35 @@ import { getCoordsForAddress } from "../util/location";
 import { Request, Response, NextFunction } from "express";
 import { Place } from "../models/place.model";
 import { User } from "../models/user.model";
-import mongoose, { Types } from "mongoose";
+import mongoose from "mongoose";
 
 export const getPlaceById = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const userId = req.params.pid;
+  const placeId = req.params.pid;
 
-  let userWithPlaces;
+  let place;
   try {
-    userWithPlaces = await User.findById(userId).populate("places");
+    place = await Place.findById(placeId);
   } catch (err) {
     const error = new HttpError(
-      "Something went wrong, could not find a place",
+      "Something went wrong, could not find a place.",
       500,
     );
     return next(error);
   }
 
-  if (!userWithPlaces) {
+  if (!place) {
     const error = new HttpError(
-      "Could not find a place for the provided id.",
+      "Could not find place for the provided id.",
       404,
     );
     return next(error);
   }
 
-  res.json({ place: userWithPlaces.toObject({ getters: true }) });
+  res.json({ place: place.toObject({ getters: true }) });
 };
 
 export const getPlacesByUserId = async (
@@ -43,29 +43,25 @@ export const getPlacesByUserId = async (
   next: NextFunction,
 ) => {
   const userId = req.params.uid;
-  let places;
 
+  let userWithPlaces;
   try {
-    places = await Place.find({ creator: userId });
+    userWithPlaces = await User.findById(userId).populate("places");
   } catch (err) {
     const error = new HttpError(
-      "Something went wrong, fetching places failed, try again later.",
+      "Fetching places failed, please try again later.",
       500,
     );
     return next(error);
   }
 
-  if (!places || places.length === 0) {
-    const error = new HttpError(
-      "Could not find a places for the provided user id.",
-      404,
+  if (!userWithPlaces || userWithPlaces.places.length === 0) {
+    return next(
+      new HttpError("Could not find places for the provided user id.", 404),
     );
-    return next(error);
   }
 
-  res.json({
-    places: places.map((place) => place.toObject({ getters: true })),
-  });
+  res.json({ places: userWithPlaces.places.map((place) => place.toJSON()) });
 };
 
 export const createPlace = async (
