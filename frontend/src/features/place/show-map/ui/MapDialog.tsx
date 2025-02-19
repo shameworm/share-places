@@ -13,8 +13,8 @@ export function MapDialog({ center, zoom, address }: PlaceMapProps) {
   return (
     <Dialog>
       <DialogTrigger className="px-4 py-2 rounded" asChild>
-        <Button variant="primary" className="font-semibold">
-          VIEW ON MAP
+        <Button variant="primary" className="text-lg uppercase font-semibold">
+          View on Map
         </Button>
       </DialogTrigger>
       <DialogContent className="gap-4">

@@ -190,23 +190,19 @@ export const deletePlace = async (
   try {
     place = await Place.findById(placeId).populate("creator");
   } catch (err) {
-    const error = new HttpError(
-      "Something went wrong, could not delete place.",
-      500,
+    return next(
+      new HttpError("Something went wrong, could not delete place.", 500),
     );
-    return next(error);
   }
 
   if (!place) {
-    const error = new HttpError(
-      "Could not find a place for the provided id.",
-      404,
+    return next(
+      new HttpError("Could not find a place for the provided id.", 404),
     );
-    return next(error);
   }
 
   if (!place.creator || !(place.creator instanceof User)) {
-    throw new HttpError("Creator not found", 404);
+    return next(new HttpError("Creator not found", 404));
   }
 
   try {
@@ -214,20 +210,19 @@ export const deletePlace = async (
     session.startTransaction();
 
     await place.deleteOne({ session });
-    place.creator.places = place.creator.places.filter(
-      (p: Types.ObjectId) => p.toString() !== placeId,
-    );
 
-    await place.creator.save({ session });
+    await User.updateOne(
+      { _id: place.creator._id },
+      { $pull: { places: placeId } },
+      { session },
+    );
 
     await session.commitTransaction();
     session.endSession();
   } catch (err) {
-    const error = new HttpError(
-      "Something went wrong, could not delete place.",
-      500,
+    return next(
+      new HttpError("Something went wrong, could not delete place.", 500),
     );
-    return next(error);
   }
 
   res.status(200).json({ message: "Deleted place." });

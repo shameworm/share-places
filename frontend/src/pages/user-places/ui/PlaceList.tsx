@@ -6,12 +6,15 @@ import { useAuthStore } from "~/features/auth";
 
 import { PlaceProperties } from "./place-propeties";
 import { PlaceFallback } from "./PlaceFallback";
+import { DeletePlaceButton } from "~/features/place/delete";
 
 export function PlaceList({ places }: { places: PlaceProperties[] }) {
   const { userId: paramsId } = useParams();
   const { userId } = useAuthStore();
 
+  console.log("Current places:", places);
   if (!places || places.length === 0) {
+    console.log("No places found, rendering fallback/");
     return <PlaceFallback isCurrentUser={paramsId === userId} />;
   }
 
@@ -32,6 +35,11 @@ export function PlaceList({ places }: { places: PlaceProperties[] }) {
               zoom={16}
               address={place.address}
             />
+          }
+          deleteBtn={
+            paramsId === userId ? (
+              <DeletePlaceButton id={place.id} title={place.title} />
+            ) : null
           }
         />
       ))}

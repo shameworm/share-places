@@ -8,4 +8,5 @@ export type PlaceProperties = {
   address: string;
   creator: string;
   viewMapBtn?: ReactNode;
+  deleteBtn?: ReactNode;
 };
