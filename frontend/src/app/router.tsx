@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { RootLayout } from "./layouts/RootLayout";
 import { lazy } from "react";
 
-const UserPage = lazy(() =>
+const UsersPage = lazy(() =>
   import("~/pages/all-users").then((module) => ({
     default: module.UsersPage,
   })),
@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <UserPage />,
+            element: <UsersPage />,
           },
           {
             path: "/auth",

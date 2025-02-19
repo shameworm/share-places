@@ -4,7 +4,6 @@ import {
   FormState,
   ControllerRenderProps,
   Path,
-  PathValue,
 } from "react-hook-form";
 import {
   FormControl,
@@ -26,7 +25,6 @@ type BaseFieldProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
   placeholder: string;
-  defaultValue?: string;
   inputType?: "textarea" | "input" | "password";
 };
 
@@ -35,7 +33,6 @@ export function BaseField<T extends FieldValues>({
   name,
   label,
   placeholder,
-  defaultValue = "",
   inputType = "input",
 }: BaseFieldProps<T>) {
   if (!form) return null;
@@ -55,7 +52,6 @@ export function BaseField<T extends FieldValues>({
     <FormField
       control={form.control}
       name={name}
-      defaultValue={defaultValue as PathValue<T, Path<T>>}
       render={({ field }) => (
         <FormItem>
           <FormLabel>{label}</FormLabel>

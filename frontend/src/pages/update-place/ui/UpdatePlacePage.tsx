@@ -10,7 +10,6 @@ export function UpdatePlacePage() {
   const { data, isLoading } = useUpdatePlacePage(placeId!);
 
   if (isLoading || !data) return <Skeleton type="page" />;
-  console.log(data);
   return (
     <div className="w-full mx-auto max-w-[40rem]">
       <UpdatePlaceForm initialData={data} />
