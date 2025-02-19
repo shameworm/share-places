@@ -9,4 +9,5 @@ export type PlaceProperties = {
   creator: string;
   viewMapBtn?: ReactNode;
   deleteBtn?: ReactNode;
+  editBtn?: ReactNode;
 };

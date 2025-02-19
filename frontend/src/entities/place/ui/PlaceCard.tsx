@@ -16,6 +16,7 @@ export function PlaceCard({
   creator,
   viewMapBtn,
   deleteBtn,
+  editBtn,
 }: PlaceProperties) {
   return (
     <Card className="flex flex-col items-center" key={id}>
@@ -32,6 +33,7 @@ export function PlaceCard({
       <CardFooter className="flex justify-between items-center gap-2">
         {viewMapBtn}
         {deleteBtn}
+        {editBtn}
       </CardFooter>
     </Card>
   );

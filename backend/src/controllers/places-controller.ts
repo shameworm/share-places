@@ -46,22 +46,29 @@ export const getPlacesByUserId = async (
 
   let userWithPlaces;
   try {
-    userWithPlaces = await User.findById(userId).populate("places");
+    userWithPlaces = await User.findById(userId).populate({ path: "places" });
   } catch (err) {
     const error = new HttpError(
-      "Fetching places failed, please try again later.",
+      "Something went wrong, could not find a place",
       500,
     );
     return next(error);
   }
 
-  if (!userWithPlaces || userWithPlaces.places.length === 0) {
-    return next(
-      new HttpError("Could not find places for the provided user id.", 404),
+  if (!userWithPlaces) {
+    const error = new HttpError(
+      "Could not find a place for the provided id.",
+      404,
     );
+    return next(error);
   }
+  console.log(userWithPlaces.places);
 
-  res.json({ places: userWithPlaces.places.map((place) => place.toJSON()) });
+  res.json({
+    places: userWithPlaces.places.map((place: any) =>
+      place.toObject({ getters: true }),
+    ),
+  });
 };
 
 export const createPlace = async (

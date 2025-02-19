@@ -7,6 +7,7 @@ import { useAuthStore } from "~/features/auth";
 import { PlaceProperties } from "./place-propeties";
 import { PlaceFallback } from "./PlaceFallback";
 import { DeletePlaceButton } from "~/features/place/delete";
+import { Link } from "react-router-dom";
 
 export function PlaceList({ places }: { places: PlaceProperties[] }) {
   const { userId: paramsId } = useParams();
@@ -15,7 +16,6 @@ export function PlaceList({ places }: { places: PlaceProperties[] }) {
   if (!places || places.length === 0) {
     return <PlaceFallback isCurrentUser={paramsId === userId} />;
   }
-
   return (
     <ul className="grid grid-cols-1 gap-4 p-0 mx-auto list-none max-w-[45rem]">
       {places.map((place: PlaceProperties) => (
@@ -37,6 +37,11 @@ export function PlaceList({ places }: { places: PlaceProperties[] }) {
           deleteBtn={
             paramsId === userId ? (
               <DeletePlaceButton id={place.id} title={place.title} />
+            ) : null
+          }
+          editBtn={
+            paramsId === userId ? (
+              <Link to={`/places/${place.id}`}>Go to</Link>
             ) : null
           }
         />

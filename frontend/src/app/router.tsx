@@ -21,6 +21,12 @@ const CreatePlace = lazy(() =>
   })),
 );
 
+const UpdatePlace = lazy(() =>
+  import("~/pages/update-place").then((module) => ({
+    default: module.UpdatePlacePage,
+  })),
+);
+
 const UserPlaces = lazy(() =>
   import("~/pages/user-places").then((module) => ({
     default: module.UserPlacesPage,
@@ -52,6 +58,10 @@ export const router = createBrowserRouter([
           {
             path: "/places/new",
             element: <CreatePlace />,
+          },
+          {
+            path: "/places/:placeId",
+            element: <UpdatePlace />,
           },
           {
             path: "/:userId/places",
