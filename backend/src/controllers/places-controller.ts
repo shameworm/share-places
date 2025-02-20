@@ -92,6 +92,10 @@ export const createPlace = async (
     return next(error);
   }
 
+  const imagePaths = req.files
+    ? (req.files as Express.Multer.File[]).map((file) => file.path)
+    : [];
+
   const createdPlace = new Place({
     title,
     description,
@@ -100,7 +104,7 @@ export const createPlace = async (
       lat: coordinates.lat,
       lng: coordinates.lng,
     },
-    image: "",
+    image: imagePaths,
     creator,
   });
 
@@ -173,10 +177,15 @@ export const updatePlace = async (
   }
 
   if (place) {
+    const imagePaths = req.files
+      ? (req.files as Express.Multer.File[]).map((file) => file.path)
+      : place?.images;
+
     place.title = title;
     place.description = description;
     place.address = address;
     place.location = { lat: coordinates.lat, lng: coordinates.lng };
+    place.images = imagePaths;
   }
 
   try {

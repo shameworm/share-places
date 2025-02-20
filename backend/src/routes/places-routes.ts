@@ -8,6 +8,7 @@ import {
   updatePlace,
   deletePlace,
 } from "../controllers/places-controller";
+import upload from "~/middleware/file-upload";
 
 export const router = express.Router();
 
@@ -17,6 +18,7 @@ router.get("/user/:uid", getPlacesByUserId);
 
 router.post(
   "/",
+  upload.array("image", 5),
   [
     check("title").not().isEmpty(),
     check("description").isLength({ min: 5 }),
@@ -27,6 +29,7 @@ router.post(
 
 router.patch(
   "/:pid",
+  upload.array("image", 5),
   [
     check("title").not().isEmpty(),
     check("description").isLength({ min: 5 }),

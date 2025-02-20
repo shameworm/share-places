@@ -8,7 +8,7 @@ interface ILocation {
 interface IPlace extends Document {
   title: string;
   description: string;
-  image: string;
+  images: string[];
   address: string;
   location: ILocation;
   creator: Types.ObjectId;
@@ -17,7 +17,7 @@ interface IPlace extends Document {
 const placeSchema = new Schema<IPlace>({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  image: { type: String },
+  images: { type: [String] },
   address: { type: String, required: true },
   location: {
     lat: { type: Number, required: true },
