@@ -8,6 +8,7 @@ import { AxiosError } from "axios";
 import { signupSchema, SignupFormValues } from "../model";
 
 import { apiClient } from "~/shared/api";
+import { useState } from "react";
 
 async function signupUser(data: SignupFormValues) {
   const response = await apiClient.post("/users/signup", data);
@@ -16,6 +17,7 @@ async function signupUser(data: SignupFormValues) {
 
 export function useSignup() {
   const navigate = useNavigate();
+  const [avatarImage, setAvatarImage] = useState<string | undefined>();
 
   const form = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
@@ -40,8 +42,9 @@ export function useSignup() {
   });
 
   async function onSubmit(mutationData: SignupFormValues) {
-    await mutateAsync({ ...mutationData });
+    await mutateAsync({ ...mutationData, image: avatarImage });
+    setAvatarImage(undefined);
   }
 
-  return { form, onSubmit };
+  return { form, onSubmit, setAvatarImage };
 }

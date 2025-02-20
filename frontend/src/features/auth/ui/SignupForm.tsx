@@ -1,5 +1,6 @@
-import { useSignup } from "../api";
+import { Link } from "react-router-dom";
 
+import { useSignup } from "../api";
 import {
   EmailSignupField,
   NameSignupField,
@@ -9,10 +10,11 @@ import {
 
 import { Form } from "~/shared/ui/form";
 import { Button } from "~/shared/ui/button";
-import { Link } from "react-router-dom";
+import { ImageUpload } from "~/shared/ui/image-upload";
+import { UserIcon } from "lucide-react";
 
 export function SignupForm() {
-  const { form, onSubmit } = useSignup();
+  const { form, onSubmit, setAvatarImage } = useSignup();
 
   return (
     <Form {...form}>
@@ -25,6 +27,20 @@ export function SignupForm() {
         </h2>
 
         <div className="flex flex-col gap-4">
+          <ImageUpload
+            onChange={(files) => {
+              if (files.length > 0) {
+                setAvatarImage(URL.createObjectURL(files[0]));
+              }
+            }}
+            value={[]}
+            maxFiles={1}
+            multiple={false}
+            isAvatar={true}
+            button={<UserIcon className="w-12 h-12 text-muted-foreground" />}
+            className="mt-4"
+          />
+
           <EmailSignupField form={form} />
           <NameSignupField form={form} />
           <PasswordSignupField form={form} />
