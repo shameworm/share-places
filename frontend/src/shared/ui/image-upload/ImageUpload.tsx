@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { Button } from "../button";
 import { X } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
+import { Input } from "../input";
 
 interface ImageUploadProps {
   onChange: (files: File[]) => void;
@@ -33,7 +34,6 @@ export function ImageUpload({
         URL.createObjectURL(file),
       );
 
-      // If it's an avatar, only keep one preview
       if (isAvatar) {
         setPreviews([newPreviews[0]]);
       } else {
@@ -67,7 +67,7 @@ export function ImageUpload({
   return (
     <div className={`space-y-4 ${className}`}>
       <div {...getRootProps()} className="cursor-pointer">
-        <input {...getInputProps()} />
+        <Input {...getInputProps()} type="file" />
         {isAvatar ? (
           <div className="relative w-24 h-24 mx-auto">
             <Avatar className="w-full h-full">

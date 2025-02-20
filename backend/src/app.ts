@@ -1,6 +1,8 @@
 import express, { Request, Response, NextFunction } from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import * as fs from "fs";
+import path from "path";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -20,6 +22,8 @@ if (!MONGODB_ACCESS_STR) {
 const app = express();
 
 app.use(bodyParser.json());
+
+app.use("/api/uploads", express.static(path.resolve("uploads")));
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -41,11 +45,24 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use((error: HttpError, req: Request, res: Response, next: NextFunction) => {
+  if (req.file) {
+    fs.unlink(req.file.path, (err: NodeJS.ErrnoException | null) => {
+      if (err) {
+        console.log("Error deleting file:", err);
+      }
+    });
+  }
+
   if (res.headersSent) {
     return next(error);
   }
-  res.status(error.code || 500);
-  res.json({ message: error.message || "An unknown error occurred!" });
+
+  const statusCode =
+    error.code && error.code >= 100 && error.code < 600 ? error.code : 500;
+
+  res
+    .status(statusCode)
+    .json({ message: error.message || "An unknown error occurred!" });
 });
 
 mongoose

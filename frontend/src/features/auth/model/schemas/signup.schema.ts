@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const signupSchema = z
   .object({
-    image: z.string().optional().nullable(),
+    image: z.instanceof(File).optional().nullable(),
     email: z.string().email("Invalid email format"),
     name: z
       .string()

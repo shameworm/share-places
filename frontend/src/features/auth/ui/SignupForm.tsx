@@ -30,7 +30,7 @@ export function SignupForm() {
           <ImageUpload
             onChange={(files) => {
               if (files.length > 0) {
-                setAvatarImage(URL.createObjectURL(files[0]));
+                setAvatarImage(files[0]);
               }
             }}
             value={[]}

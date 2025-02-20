@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 export function UserCard({ id, name, image, places }: UserProperties) {
   const navigate = useNavigate();
   const initials = getInitials(name);
+  const imageUrl = `${import.meta.env.VITE_API_URL}/${image}`;
+
   return (
     <Card
       className="flex items-center hover:bg-primary transition hover:duration-500"
@@ -16,7 +18,7 @@ export function UserCard({ id, name, image, places }: UserProperties) {
     >
       <Avatar className="mx-4">
         {image ? (
-          <AvatarImage src={image} />
+          <AvatarImage src={imageUrl} />
         ) : (
           <AvatarFallback className="text-2xl">{initials}</AvatarFallback>
         )}

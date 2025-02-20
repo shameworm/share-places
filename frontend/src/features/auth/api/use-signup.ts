@@ -10,14 +10,26 @@ import { signupSchema, SignupFormValues } from "../model";
 import { apiClient } from "~/shared/api";
 import { useState } from "react";
 
-async function signupUser(data: SignupFormValues) {
-  const response = await apiClient.post("/users/signup", data);
+async function signupUser(data: SignupFormValues & { image?: File }) {
+  const formData = new FormData();
+  formData.append("email", data.email);
+  formData.append("name", data.name);
+  formData.append("password", data.password);
+  formData.append("confirmPassword", data.confirmPassword);
+  if (data.image) {
+    formData.append("image", data.image);
+  }
+  console.log(formData);
+  const response = await apiClient.post("/users/signup", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
   return response.data;
 }
 
 export function useSignup() {
   const navigate = useNavigate();
-  const [avatarImage, setAvatarImage] = useState<string | undefined>();
+  const [avatarImage, setAvatarImage] = useState<File | undefined>();
 
   const form = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),

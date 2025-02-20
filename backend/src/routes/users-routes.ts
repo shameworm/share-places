@@ -2,6 +2,7 @@ import express from "express";
 import { check } from "express-validator";
 
 import { getUsers, login, signup } from "../controllers/users-controller";
+import upload from "../middleware/file-upload";
 
 export const router = express.Router();
 
@@ -9,6 +10,7 @@ router.get("/", getUsers);
 
 router.post(
   "/signup",
+  upload.single("image"),
   [
     check("name")
       .not()
