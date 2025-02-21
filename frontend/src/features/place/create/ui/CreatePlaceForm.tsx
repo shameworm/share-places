@@ -17,7 +17,7 @@ export function CreatePlaceForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full max-w-lg bg-primary-foreground p-6 rounded-lg shadow-lg flex flex-col gap-6"
+        className="w-full max-w-lg bg-card p-6 rounded-lg shadow-lg flex flex-col gap-6"
       >
         <h2 className="text-2xl font-semibold text-primary text-center">
           Create a Place
