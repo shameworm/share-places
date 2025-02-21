@@ -27,7 +27,7 @@ export function PlaceCard({
         <p className="font-semibold">{address}</p>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardFooter className="flex justify-between items-center gap-2">
+      <CardFooter className="flex flex-col md:flex-row justify-between items-center gap-2 max-w-xl">
         {viewMapBtn}
         {deleteBtn}
         {editBtn}

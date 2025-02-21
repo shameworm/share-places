@@ -8,6 +8,7 @@ import { PlaceProperties } from "./place-propeties";
 import { PlaceFallback } from "./PlaceFallback";
 import { DeletePlaceButton } from "~/features/place/delete";
 import { Link } from "react-router-dom";
+import { Button } from "~/shared/ui/button";
 
 export function PlaceList({ places }: { places: PlaceProperties[] }) {
   const { userId: paramsId } = useParams();
@@ -41,7 +42,14 @@ export function PlaceList({ places }: { places: PlaceProperties[] }) {
           }
           editBtn={
             paramsId === userId ? (
-              <Link to={`/places/${place.id}`}>Go to</Link>
+              <Link to={`/places/${place.id}`} className="w-full md:w-40">
+                <Button
+                  variant="secondary"
+                  className="text-lg font-semibold w-full md:w-40"
+                >
+                  Update
+                </Button>
+              </Link>
             ) : null
           }
         />

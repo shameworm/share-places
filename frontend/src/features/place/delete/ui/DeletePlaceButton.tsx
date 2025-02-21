@@ -21,7 +21,7 @@ export function DeletePlaceButton({ id, title }: DeletePlaceButtonProperties) {
         <Button
           variant="destructive"
           disabled={isDeleting}
-          className="text-lg uppercase font-semibold"
+          className="text-lg font-semibold w-full md:w-40"
         >
           Delete
         </Button>
