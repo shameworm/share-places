@@ -33,7 +33,6 @@ export function ImageUploadField<T extends FieldValues>({
   const [imageFiles, setImageFiles] = useState<FileList | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   if (!form) return null;
-  console.log(imageFiles);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -48,14 +47,14 @@ export function ImageUploadField<T extends FieldValues>({
     if (imageFiles && imageFiles[0]) {
       const avatarUrl = URL.createObjectURL(imageFiles[0]);
       return (
-        <Avatar className="mx-auto bg-muted-foreground w-24 h-24">
+        <Avatar className="mx-auto w-24 h-24">
           <AvatarImage src={avatarUrl} alt="Avatar Image" />
         </Avatar>
       );
     }
     return (
-      <Avatar className="mx-auto">
-        <AvatarFallback>AV</AvatarFallback>
+      <Avatar className="mx-auto w-24 h-24">
+        <AvatarFallback>FL</AvatarFallback>
       </Avatar>
     );
   };

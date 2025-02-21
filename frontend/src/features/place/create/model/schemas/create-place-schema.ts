@@ -1,6 +1,11 @@
 import { z } from "zod";
 
 export const createPlaceSchema = z.object({
+  images: z
+    .instanceof(FileList)
+    .refine((files) => files.length >= 1 && files.length <= 5, {
+      message: "Please provide between one and five images.",
+    }),
   title: z.string().min(3, "Title must be at least 3 characters"),
   description: z
     .string()

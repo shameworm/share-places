@@ -62,7 +62,6 @@ export const getPlacesByUserId = async (
     );
     return next(error);
   }
-  console.log(userWithPlaces.places);
 
   res.json({
     places: userWithPlaces.places.map((place: any) =>
@@ -92,7 +91,7 @@ export const createPlace = async (
     return next(error);
   }
 
-  const imagePaths = req.files
+  const imagesPaths = req.files
     ? (req.files as Express.Multer.File[]).map((file) => file.path)
     : [];
 
@@ -104,7 +103,7 @@ export const createPlace = async (
       lat: coordinates.lat,
       lng: coordinates.lng,
     },
-    image: imagePaths,
+    images: imagesPaths,
     creator,
   });
 

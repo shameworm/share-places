@@ -8,6 +8,7 @@ import {
 
 import { Form } from "~/shared/ui/form";
 import { Button } from "~/shared/ui/button";
+import { ImageUploadField } from "~/shared/ui/form/ImageUploadField";
 
 export function CreatePlaceForm() {
   const { form, onSubmit } = useCreatePlace();
@@ -23,6 +24,11 @@ export function CreatePlaceForm() {
         </h2>
 
         <div className="flex flex-col gap-4">
+          <ImageUploadField
+            form={form}
+            name="images"
+            label="Upload place images"
+          />
           <TitleField form={form} />
           <DescriptionField form={form} />
           <AddressField form={form} />

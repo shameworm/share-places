@@ -18,7 +18,7 @@ router.get("/user/:uid", getPlacesByUserId);
 
 router.post(
   "/",
-  upload.array("image", 5),
+  upload.array("images[]", 5),
   [
     check("title").not().isEmpty(),
     check("description").isLength({ min: 5 }),

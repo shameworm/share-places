@@ -10,8 +10,22 @@ import { CreatePlaceFormValues, createPlaceSchema } from "../model";
 import { useAuthStore } from "~/features/auth";
 import { useNavigate } from "react-router-dom";
 
-async function createPlace(data: CreatePlaceFormValues) {
-  const response = await apiClient.post("/places", data);
+async function createPlace(data: CreatePlaceFormValues & { creator?: string }) {
+  const formData = new FormData();
+  formData.append("title", data.title);
+  formData.append("description", data.description);
+  formData.append("address", data.address);
+  formData.append("creator", data.creator || "");
+  if (data.images) {
+    Array.from(data.images).forEach((file) => {
+      formData.append("images[]", file);
+    });
+  }
+
+  const response = await apiClient.post("/places", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
   return response.data;
 }
 
@@ -24,6 +38,7 @@ export const useCreatePlace = () => {
       title: "",
       description: "",
       address: "",
+      images: undefined,
     },
   });
 
@@ -40,7 +55,7 @@ export const useCreatePlace = () => {
   });
 
   async function onSubmit(mutationData: CreatePlaceFormValues) {
-    const dataWithCreator = { ...mutationData, creator: userId };
+    const dataWithCreator = { ...mutationData, creator: userId! };
     await mutateAsync(dataWithCreator);
   }
 
