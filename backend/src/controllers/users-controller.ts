@@ -34,10 +34,6 @@ export const signup = async (
     return next(error);
   }
 
-  if (!req.file) {
-    return next(new HttpError("Profile image upload failed.", 400));
-  }
-
   const { name, email, password } = req.body;
 
   let existingUser;

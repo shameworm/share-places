@@ -8,7 +8,7 @@ import {
   updatePlace,
   deletePlace,
 } from "../controllers/places-controller";
-import upload from "~/middleware/file-upload";
+import upload from "../middleware/file-upload";
 
 export const router = express.Router();
 
