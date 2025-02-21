@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export type PlaceProperties = {
   id: string;
-  image: string;
+  images: string[];
   title: string;
   description: string;
   address: string;

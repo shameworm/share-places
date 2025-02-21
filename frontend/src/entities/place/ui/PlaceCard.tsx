@@ -6,25 +6,22 @@ import {
   CardTitle,
 } from "~/shared/ui/card";
 import { PlaceProperties } from "./place-properties";
+import { ImagesCarousel } from "~/shared/ui/carousel";
 
 export function PlaceCard({
   id,
   title,
   description,
   address,
-  image,
+  images,
   creator,
   viewMapBtn,
   deleteBtn,
   editBtn,
 }: PlaceProperties) {
   return (
-    <Card className="flex flex-col items-center" key={id}>
-      <img
-        src={image}
-        alt={`${title} by ${creator}`}
-        className="w-full h-full object-cover"
-      />
+    <Card className="flex flex-col items-center" key={id + creator}>
+      <ImagesCarousel arrayOfImages={images} />
       <CardHeader className="mx-0 text-center">
         <CardTitle>{title}</CardTitle>
         <p className="font-semibold">{address}</p>

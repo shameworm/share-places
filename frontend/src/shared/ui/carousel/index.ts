@@ -1,1 +1,1 @@
-export * from "./Carousel";
+export { ImagesCarousel } from "./ImagesCarousel";
