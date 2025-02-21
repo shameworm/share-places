@@ -1,12 +1,13 @@
+import { Request, Response, NextFunction } from "express";
+import mongoose from "mongoose";
 import { validationResult } from "express-validator";
+import * as fs from "fs";
+import path from "path";
 
 import { HttpError } from "../models/http-error";
 import { getCoordsForAddress } from "../util/location";
-
-import { Request, Response, NextFunction } from "express";
 import { Place } from "../models/place.model";
 import { User } from "../models/user.model";
-import mongoose from "mongoose";
 
 export const getPlaceById = async (
   req: Request,
@@ -224,6 +225,23 @@ export const deletePlace = async (
 
   if (!place.creator || !(place.creator instanceof User)) {
     return next(new HttpError("Creator not found", 404));
+  }
+
+  try {
+    if (place.images && place.images.length > 0) {
+      for (const image of place.images) {
+        const filePath = path.join(image);
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            console.error(`Failed to delete image: ${image}`, err);
+          }
+        });
+      }
+    }
+  } catch (err) {
+    return next(
+      new HttpError("Something went wrong while deleting images.", 500),
+    );
   }
 
   try {
