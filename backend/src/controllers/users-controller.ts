@@ -1,6 +1,7 @@
-import { validationResult } from "express-validator";
-import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import { Request, Response, NextFunction } from "express";
+import { validationResult } from "express-validator";
 
 import { HttpError } from "../models/http-error";
 import { User } from "../models/user.model";
@@ -123,8 +124,26 @@ export const login = async (
     return next(error);
   }
 
+  let token;
+
+  try {
+    token = jwt.sign(
+      { userId: existingUser.id },
+      process.env.JWT_PRIVATE_KEY!,
+      {
+        expiresIn: "1h",
+      },
+    );
+  } catch (err) {
+    const error = new HttpError(
+      "Could not log you in, please check you credentials and try again.",
+      500,
+    );
+    return next(error);
+  }
+
   res.json({
-    message: "Logged in!",
-    user: existingUser.toObject({ getters: true }),
+    token,
+    userId: existingUser.id,
   });
 };
