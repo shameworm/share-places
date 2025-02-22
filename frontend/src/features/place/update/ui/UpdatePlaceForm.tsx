@@ -8,6 +8,7 @@ import {
 
 import { Form } from "~/shared/ui/form";
 import { Button } from "~/shared/ui/button";
+import { ImageUploadField } from "~/shared/ui/form/ImageUploadField";
 
 export function UpdatePlaceForm({
   initialData,
@@ -17,6 +18,7 @@ export function UpdatePlaceForm({
     description: string;
     address: string;
     id: string;
+    images: FileList;
   };
 }) {
   const { form, onSubmit } = useUpdatePlace({ initialData });
@@ -31,6 +33,7 @@ export function UpdatePlaceForm({
         </h2>
 
         <div className="flex flex-col gap-4">
+          <ImageUploadField form={form} name="images" label="Upload images" />
           <TitleField form={form} />
           <DescriptionField form={form} />
           <AddressField form={form} />

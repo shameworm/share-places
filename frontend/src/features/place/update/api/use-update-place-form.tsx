@@ -9,7 +9,21 @@ import { apiClient } from "~/shared/api";
 import { updatePlaceFormValues, updatePlaceSchema } from "../model";
 
 async function updatePlace(data: updatePlaceFormValues, placeId: string) {
-  const response = await apiClient.patch(`/places/${placeId}`, data);
+  const formData = new FormData();
+  formData.append("title", data.title);
+  formData.append("description", data.description);
+  formData.append("address", data.address);
+
+  if (data.images && data.images !== null) {
+    Array.from(data.images).forEach((file) => {
+      formData.append("images[]", file);
+    });
+  }
+
+  const response = await apiClient.patch(`/places/${placeId}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
   return response.data;
 }
 
@@ -21,6 +35,7 @@ export const useUpdatePlace = ({
     description: string;
     address: string;
     id: string;
+    images: FileList | null;
   };
 }) => {
   const form = useForm<updatePlaceFormValues>({
@@ -29,6 +44,7 @@ export const useUpdatePlace = ({
       title: initialData?.title || "",
       description: initialData?.description || "",
       address: initialData?.address || "",
+      images: null,
     },
   });
 

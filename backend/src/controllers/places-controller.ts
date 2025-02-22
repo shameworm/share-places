@@ -181,11 +181,23 @@ export const updatePlace = async (
       ? (req.files as Express.Multer.File[]).map((file) => file.path)
       : place?.images;
 
+    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+      if (place.images && place.images.length > 0) {
+        place.images.forEach((imagePath) => {
+          fs.unlink(imagePath, (err) => {
+            if (err) {
+              console.error("Failed to delete old image:", imagePath);
+            }
+          });
+        });
+      }
+      place.images = imagePaths;
+    }
+
     place.title = title;
     place.description = description;
     place.address = address;
     place.location = { lat: coordinates.lat, lng: coordinates.lng };
-    place.images = imagePaths;
   }
 
   try {
