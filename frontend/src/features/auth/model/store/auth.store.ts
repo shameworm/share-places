@@ -1,15 +1,23 @@
 import { create } from "zustand";
 
 type AuthState = {
-  isLoggedIn: boolean;
+  token: string | null;
   userId: string | null;
-  login: (userId: string) => void;
+  login: (userId: string, token: string) => void;
   logout: () => void;
 };
 
 export const useAuthStore = create<AuthState>((set) => ({
-  isLoggedIn: false,
-  userId: null,
-  login: (userId: string) => set({ isLoggedIn: true, userId }),
-  logout: () => set({ isLoggedIn: false, userId: null }),
+  token: localStorage.getItem("token"),
+  userId: localStorage.getItem("userId"),
+  login: (userId, token) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("userId", userId);
+    set({ userId, token });
+  },
+  logout: () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    set({ token: null, userId: null });
+  },
 }));

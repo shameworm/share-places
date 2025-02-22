@@ -8,16 +8,15 @@ interface NavLinksProps {
 }
 
 export function NavLinks({ isMobile = false }: NavLinksProps) {
-  const { userId } = useAuthStore();
+  const { userId, token, logout } = useAuthStore();
   const buttonClass = isMobile ? "w-full " : "text-lg";
   const buttonVariant = isMobile ? "secondary" : "link";
-  const { isLoggedIn, logout } = useAuthStore();
 
   const links = [
     { to: "/", label: "All users" },
-    isLoggedIn && { to: `/${userId}/places`, label: "My places" },
-    isLoggedIn && { to: "/places/new", label: "Add Place" },
-    !isLoggedIn && { to: "/auth", label: "Authenticate" },
+    userId && token && { to: `/${userId}/places`, label: "My places" },
+    userId && token && { to: "/places/new", label: "Add Place" },
+    !userId && !token && { to: "/auth", label: "Authenticate" },
   ].filter((link): link is { to: string; label: string } => Boolean(link));
 
   return (
@@ -43,7 +42,7 @@ export function NavLinks({ isMobile = false }: NavLinksProps) {
           </li>
         );
       })}
-      {isLoggedIn && (
+      {userId && token && (
         <li>
           {isMobile ? (
             <SheetClose asChild>

@@ -1,18 +1,28 @@
-import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 
 import { apiClient } from "~/shared/api";
+import { useAuthStore } from "~/features/auth";
 
-async function deletePlace(placeId: string) {
-  const response = await apiClient.delete(`/places/${placeId}`);
+async function deletePlace({
+  placeId,
+  token,
+}: {
+  placeId: string;
+  token: string;
+}) {
+  const response = await apiClient.delete(`/places/${placeId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 }
 
 export const useDeletePlaceButton = () => {
   const queryClient = useQueryClient();
-  const { userId } = useParams();
+  const { userId, token } = useAuthStore();
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: deletePlace,
@@ -27,7 +37,7 @@ export const useDeletePlaceButton = () => {
   });
 
   async function deleteHandler(placeId: string) {
-    await mutateAsync(placeId);
+    await mutateAsync({ placeId, token: token! });
   }
 
   return { deleteHandler, isDeleting: isPending };

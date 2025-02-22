@@ -145,5 +145,6 @@ export const login = async (
   res.json({
     token,
     userId: existingUser.id,
+    name: existingUser.name,
   });
 };

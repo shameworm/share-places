@@ -7,8 +7,13 @@ import { toast } from "sonner";
 import { apiClient } from "~/shared/api";
 
 import { updatePlaceFormValues, updatePlaceSchema } from "../model";
+import { useAuthStore } from "~/features/auth";
 
-async function updatePlace(data: updatePlaceFormValues, placeId: string) {
+async function updatePlace(
+  data: updatePlaceFormValues,
+  placeId: string,
+  token: string,
+) {
   const formData = new FormData();
   formData.append("title", data.title);
   formData.append("description", data.description);
@@ -21,7 +26,10 @@ async function updatePlace(data: updatePlaceFormValues, placeId: string) {
   }
 
   const response = await apiClient.patch(`/places/${placeId}`, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
   });
 
   return response.data;
@@ -38,6 +46,7 @@ export const useUpdatePlace = ({
     images: FileList | null;
   };
 }) => {
+  const { token } = useAuthStore();
   const form = useForm<updatePlaceFormValues>({
     resolver: zodResolver(updatePlaceSchema),
     defaultValues: {
@@ -50,7 +59,7 @@ export const useUpdatePlace = ({
 
   const { mutateAsync } = useMutation({
     mutationFn: (data: updatePlaceFormValues) =>
-      updatePlace(data, initialData.id!),
+      updatePlace(data, initialData.id!, token!),
     onSuccess: () => {
       toast.success("Place successfully updated!");
     },
@@ -60,7 +69,11 @@ export const useUpdatePlace = ({
   });
 
   async function onSubmit(mutationData: updatePlaceFormValues) {
-    const dataWithCreator = { ...mutationData, placeId: initialData.id };
+    const dataWithCreator = {
+      ...mutationData,
+      placeId: initialData.id,
+      token: token!,
+    };
     await mutateAsync(dataWithCreator);
   }
 

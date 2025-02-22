@@ -29,9 +29,9 @@ export function useLogin() {
   const { mutateAsync } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      const { user } = data;
-      toast.success(`Welcome ${user.name}!`);
-      login(user.id);
+      const { userId, name, token } = data;
+      toast.success(`Welcome ${name}!`);
+      login(userId, token);
       form.reset();
       navigate("/");
     },
