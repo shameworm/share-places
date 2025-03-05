@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 import { HttpError } from "../models/http-error";
 
-interface CustomRequest extends Request {
+export interface CustomRequest extends Request {
   userData?: { userId: string };
 }
 

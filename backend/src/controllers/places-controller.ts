@@ -9,6 +9,8 @@ import { getCoordsForAddress } from "../util/location";
 import { Place } from "../models/place.model";
 import { User } from "../models/user.model";
 
+import { CustomRequest } from "../middleware/check-auth";
+
 export const getPlaceById = async (
   req: Request,
   res: Response,
@@ -143,7 +145,7 @@ export const createPlace = async (
 };
 
 export const updatePlace = async (
-  req: Request,
+  req: CustomRequest,
   res: Response,
   next: NextFunction,
 ) => {
@@ -173,6 +175,11 @@ export const updatePlace = async (
       "Something went wrong, could not find a place",
       500,
     );
+    return next(error);
+  }
+
+  if (!req.userData || place?.creator?.toString() !== req.userData.userId) {
+    const error = new HttpError("You are no allowed to edit this place.", 401);
     return next(error);
   }
 
@@ -214,7 +221,7 @@ export const updatePlace = async (
 };
 
 export const deletePlace = async (
-  req: Request,
+  req: CustomRequest,
   res: Response,
   next: NextFunction,
 ) => {
@@ -233,6 +240,11 @@ export const deletePlace = async (
     return next(
       new HttpError("Could not find a place for the provided id.", 404),
     );
+  }
+
+  if (!req.userData || place?.creator?.toString() !== req.userData.userId) {
+    const error = new HttpError("You are no allowed to edit this place.", 401);
+    return next(error);
   }
 
   if (!place.creator || !(place.creator instanceof User)) {
