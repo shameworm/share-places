@@ -242,13 +242,16 @@ export const deletePlace = async (
     );
   }
 
-  if (!req.userData || place?.creator?.toString() !== req.userData.userId) {
-    const error = new HttpError("You are no allowed to edit this place.", 401);
-    return next(error);
-  }
-
   if (!place.creator || !(place.creator instanceof User)) {
     return next(new HttpError("Creator not found", 404));
+  }
+
+  if (!req.userData || place?.creator?._id.toString() !== req.userData.userId) {
+    const error = new HttpError(
+      "You are no allowed to delete this place.",
+      401,
+    );
+    return next(error);
   }
 
   try {

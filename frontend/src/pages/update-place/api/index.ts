@@ -1,1 +1,1 @@
-export { useUpdatePlacePage } from "./useUpdatePlacePage";
+export { useUpdatePlacePage } from "./use-update-place-page";
